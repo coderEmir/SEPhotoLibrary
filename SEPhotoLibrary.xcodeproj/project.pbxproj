@@ -21,6 +21,10 @@
 		A0B3FDA4255ABB6E0072BCED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0B3FDA3255ABB6E0072BCED /* Assets.xcassets */; };
 		A0B3FDA7255ABB6E0072BCED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B3FDA5255ABB6E0072BCED /* LaunchScreen.storyboard */; };
 		A0B3FDAA255ABB6E0072BCED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B3FDA9255ABB6E0072BCED /* main.m */; };
+		A0C74416257DC9B800AB707B /* SEAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C74415257DC9B800AB707B /* SEAlbumListView.m */; };
+		A0C7441B257DC9C900AB707B /* SEAlbumListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441A257DC9C900AB707B /* SEAlbumListViewCell.m */; };
+		A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441E257DCE8B00AB707B /* SEAlbumView.m */; };
+		A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C74422257E033C00AB707B /* SECameraViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,14 @@
 		A0B3FDA6255ABB6E0072BCED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0B3FDA8255ABB6E0072BCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0B3FDA9255ABB6E0072BCED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A0C74414257DC9B800AB707B /* SEAlbumListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumListView.h; sourceTree = "<group>"; };
+		A0C74415257DC9B800AB707B /* SEAlbumListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumListView.m; sourceTree = "<group>"; };
+		A0C74419257DC9C900AB707B /* SEAlbumListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumListViewCell.h; sourceTree = "<group>"; };
+		A0C7441A257DC9C900AB707B /* SEAlbumListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumListViewCell.m; sourceTree = "<group>"; };
+		A0C7441D257DCE8B00AB707B /* SEAlbumView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumView.h; sourceTree = "<group>"; };
+		A0C7441E257DCE8B00AB707B /* SEAlbumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumView.m; sourceTree = "<group>"; };
+		A0C74421257E033C00AB707B /* SECameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SECameraViewController.h; sourceTree = "<group>"; };
+		A0C74422257E033C00AB707B /* SECameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SECameraViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +89,8 @@
 			children = (
 				A0A0BBDA255E713F008597BB /* SEAlbumViewController.h */,
 				A0A0BBDB255E713F008597BB /* SEAlbumViewController.m */,
+				A0C74421257E033C00AB707B /* SECameraViewController.h */,
+				A0C74422257E033C00AB707B /* SECameraViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -84,6 +98,7 @@
 		A0A0BBC9255E68B5008597BB /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A0C74413257DC96E00AB707B /* albumListView */,
 				A0A0BBDD255F63AB008597BB /* SEAlbumCollectionViewCell.h */,
 				A0A0BBDE255F63AB008597BB /* SEAlbumCollectionViewCell.m */,
 			);
@@ -153,6 +168,19 @@
 				A0B3FDA9255ABB6E0072BCED /* main.m */,
 			);
 			path = SEPhotoLibrary;
+			sourceTree = "<group>";
+		};
+		A0C74413257DC96E00AB707B /* albumListView */ = {
+			isa = PBXGroup;
+			children = (
+				A0C74414257DC9B800AB707B /* SEAlbumListView.h */,
+				A0C74415257DC9B800AB707B /* SEAlbumListView.m */,
+				A0C74419257DC9C900AB707B /* SEAlbumListViewCell.h */,
+				A0C7441A257DC9C900AB707B /* SEAlbumListViewCell.m */,
+				A0C7441D257DCE8B00AB707B /* SEAlbumView.h */,
+				A0C7441E257DCE8B00AB707B /* SEAlbumView.m */,
+			);
+			path = albumListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,8 +256,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C74416257DC9B800AB707B /* SEAlbumListView.m in Sources */,
+				A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */,
+				A0C7441B257DC9C900AB707B /* SEAlbumListViewCell.m in Sources */,
 				A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */,
 				A0B3FD9F255ABB6B0072BCED /* ViewController.m in Sources */,
+				A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */,
 				A0A0BBDC255E713F008597BB /* SEAlbumViewController.m in Sources */,
 				A0B3FD99255ABB6B0072BCED /* AppDelegate.m in Sources */,
 				A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */,
@@ -380,7 +412,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RTA9R7QH9;
 				INFOPLIST_FILE = SEPhotoLibrary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -400,7 +432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RTA9R7QH9;
 				INFOPLIST_FILE = SEPhotoLibrary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

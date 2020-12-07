@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SEAlbumManager : NSObject
 
-+ (void)showPhotoManager:(UIViewController  *)superController withMaxImageCount:(NSInteger)maxImageCount andAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *))albumArrayBlock;
++ (void)showPhotoManager:(UIViewController *)superController withMaxImageCount:(NSInteger)maxImageCount showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop andAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *photoModel))albumArrayBlock;
 
 @end
 

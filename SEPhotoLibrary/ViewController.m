@@ -25,8 +25,8 @@
 
 - (void)btnEvent
 {
-    [SEAlbumManager showPhotoManager:self withMaxImageCount:5 andAlbumArrayBlock:^(NSMutableArray<SEPhotoModel *> *data) {
-        
+    [SEAlbumManager showPhotoManager:self withMaxImageCount:5 showCamera:YES showFilter:YES pictureScrollsFromTheTop:YES andAlbumArrayBlock:^(NSMutableArray<SEPhotoModel *> * _Nonnull photoModel) {
+            
     }];
 }
 @end

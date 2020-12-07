@@ -11,14 +11,14 @@
 #import "SEPhotoManager.h"
 @implementation SEAlbumManager
 
-+ (void)showPhotoManager:(UIViewController  *)superController withMaxImageCount:(NSInteger)maxImageCount andAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *))albumArrayBlock
++ (void)showPhotoManager:(UIViewController *)superController withMaxImageCount:(NSInteger)maxImageCount showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop andAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *photoModel))albumArrayBlock
 {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (status == PHAuthorizationStatusAuthorized) {
-                // user agree, show album controller.
+
                 [SEPhotoManager defaultManager].maxImageCount = maxImageCount;
-                [self showViewControllerWithAlbumArrayBlock:albumArrayBlock inController:superController];
+                [self showViewControllerWithAlbumArrayBlock:albumArrayBlock inController:superController showCamera:isShowCamera showFilter:isShowFilter pictureScrollsFromTheTop:isScrollTop];
             }
             else
             {
@@ -30,9 +30,10 @@
     }];
 }
 
-+ (void)showViewControllerWithAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *))albumArrayBlock inController:(UIViewController *)superController
++ (void)showViewControllerWithAlbumArrayBlock:(void(^)(NSMutableArray <SEPhotoModel *> *photoModel))albumArrayBlock inController:(UIViewController *)superController showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop
 {
     SEAlbumViewController *controller = [[SEAlbumViewController alloc] init];
+    [controller showCamera:isShowCamera showFilter:isShowFilter pictureScrollsFromTheTop:isScrollTop];
     controller.confirmActionBlock = ^{
         albumArrayBlock(SEPhotoDefaultManager.photoModelList);
     };

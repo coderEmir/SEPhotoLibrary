@@ -8,11 +8,15 @@
 
 #import "SEAlbumViewController.h"
 
+#import "SECameraViewController.h"
+
 #import "SEAlbumCollectionViewCell.h"
 
 #import "SEPhotoManager.h"
 #import "SEPhotoModel.h"
 #import "SEAlbumModel.h"
+
+#import "SEAlbumView.h"
 
 @interface SEAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -30,13 +34,18 @@
 
 // 相册列表
 @property (nonatomic, strong) UICollectionView *albumCollectionView;
+
+@property (nonatomic ,assign) BOOL isShowCamera;
+
+@property (nonatomic ,assign) BOOL isFromTop;
+
+@property (nonatomic ,assign) BOOL isShowFilter;
 @end
 
 @implementation SEAlbumViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self setUp];
 }
 
@@ -45,6 +54,13 @@
     [self setNavigationItems];
     [self getThumbnailImages];
     [self handleChooseResult];
+}
+
+- (void)showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isFromTop
+{
+    self.isShowCamera = isShowCamera;
+    self.isFromTop = isFromTop;
+    self.isShowFilter = isShowFilter;
 }
 
 - (void)setNavigationItems
@@ -80,14 +96,14 @@
     
     [self.showAlbumButton setTitle:albumModel.collectionTitle forState:UIControlStateNormal];
     [self.albumCollectionView reloadData];
-    
-    [self collectionViewScrollToBottom:YES];
+
+    if (self.isFromTop) return;
+    [self collectionViewScrollToBottom];
 }
 
-- (void)collectionViewScrollToBottom:(BOOL)isScroll
+- (void)collectionViewScrollToBottom
 {
     if (_albumModel.assets.count == 0) return;
-    if (!isScroll) return;
     
     CGFloat itemH = ScreenWidth / 3.f;
     NSInteger lastRow = _albumModel.assets.count % 3 == 0 ? 0 : 1;
@@ -158,35 +174,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SEAlbumCollectionViewCell *cell = (SEAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    BOOL isReloadCollectionView = [self isReloadCollectionViewAtIndexPath:indexPath];
-    cell.isSelect = [self.albumModel.selectRows containsObject:@(indexPath.row)];
-    if (isReloadCollectionView) {
-        [self.albumCollectionView reloadData];
-    }
-#pragma mark - 模拟器测运行时试用 ——> app运行后点击任意一张照片，加载3000张图片（约8分钟完成加载），重新运行，可观察内存消耗
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        for (NSInteger index = 0; index < 2999; index ++) {
-//            [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
-//                [PHAssetChangeRequest creationRequestForAssetFromImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test1.png" ofType:nil]]];
-//            } completionHandler:^(BOOL success, NSError * _Nullable error) {
-//                if (error) {
-//                    NSLog(@"%@",@"保存失败");
-//                } else {
-//                    NSLog(@"%@",@"保存成功");
-//                }
-//            }];
-//        }
-//        [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
-//            [PHAssetChangeRequest creationRequestForAssetFromImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test2.png" ofType:nil]]];
-//        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-//            if (error) {
-//                NSLog(@"%@",@"保存失败");
-//            } else {
-//                NSLog(@"%@",@"保存成功");
-//            }
-//        }];
-//    });
+//    SEAlbumCollectionViewCell *cell = (SEAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    BOOL isReloadCollectionView = [self isReloadCollectionViewAtIndexPath:indexPath];
+//    cell.isSelect = [self.albumModel.selectRows containsObject:@(indexPath.row)];
+//    if (isReloadCollectionView) {
+//        [self.albumCollectionView reloadData];
+//    }
+    SECameraViewController *controller = [[SECameraViewController alloc] init];
+    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (BOOL)isReloadCollectionViewAtIndexPath:(NSIndexPath *)indexPath
@@ -206,6 +202,21 @@
     }
 }
 
+- (void)saveImage:(UIImage *)UIImage
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
+            [PHAssetChangeRequest creationRequestForAssetFromImage:UIImage];
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"%@",@"保存失败");
+            } else {
+                NSLog(@"%@",@"保存成功");
+            }
+        }];
+    });
+}
+
 #pragma mark - event
 - (void)backAction
 {
@@ -215,11 +226,6 @@
 }
 
 - (void)confirmAction:(UIButton *)btn
-{
-    
-}
-
-- (void)showAlbum:(UIButton *)btn
 {
     if (SEPhotoDefaultManager.choiceCount == 0) return;
     btn.enabled = NO;
@@ -243,6 +249,18 @@
             photoModel.asset = albumModel.assets[row.integerValue];
         }
     }
+}
+
+- (void)showAlbum:(UIButton *)button
+{
+    button.selected = !button.selected;
+    
+    [SEAlbumView showAlbumView:self.assetCollectionList navigationBarMaxY:CGRectGetMaxY(self.navigationController.navigationBar.frame) complete:^(SEAlbumModel *albumModel) {
+        if (albumModel) {
+            self.albumModel = albumModel;
+        }
+        button.selected = !button.selected;
+    }];
 }
 
 #pragma mark - lazyLoad

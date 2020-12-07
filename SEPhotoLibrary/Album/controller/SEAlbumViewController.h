@@ -14,6 +14,8 @@ typedef void(^ConfirmActionBlock)(void);
 
 @property (nonatomic ,copy) ConfirmActionBlock confirmActionBlock;
 
+- (void)showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isFromTop;
+
 @end
 
 NS_ASSUME_NONNULL_END
