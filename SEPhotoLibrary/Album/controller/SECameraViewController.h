@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^savePhotoBlock)(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SECameraViewController : UIViewController
+
+- (void)savePhotoSuccessBlock:(savePhotoBlock)savePhotoBlock;
 
 @end
 

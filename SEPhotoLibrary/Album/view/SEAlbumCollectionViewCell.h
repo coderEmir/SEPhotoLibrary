@@ -33,6 +33,8 @@ typedef void(^CellSelectedBlock)(PHAsset *asset);
 
 #pragma mark - 加载图片
 -(void)loadImage:(NSIndexPath *)indexPath;
+
+- (void)loadCamera;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,7 +27,7 @@
 // 确定按钮
 @property (nonatomic, strong) UIButton *confirmButton;
 // 相册数组
-@property (nonatomic ,strong) NSMutableArray *assetCollectionList;
+@property (nonatomic ,strong) NSMutableArray <SEAlbumModel *>*assetCollectionList;
 
 // 当前相册
 @property (nonatomic, strong) SEAlbumModel *albumModel;
@@ -118,12 +118,10 @@
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
 
-        // get person collection album
-        [weakSelf addAlbumToListWithAssetType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumFavorites];
+        [weakSelf addAlbumToListWithSubtype:PHAssetCollectionSubtypeSmartAlbumFavorites];
         // get camera roll
-        [weakSelf addAlbumToListWithAssetType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumSyncedAlbum];
-        // get all photos
-        [weakSelf addAlbumToListWithAssetType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary];
+        [weakSelf addAlbumToListWithSubtype:PHAssetCollectionSubtypeAlbumSyncedAlbum];
+        // get person collection album
         
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.albumModel = weakSelf.assetCollectionList.firstObject;
@@ -131,9 +129,76 @@
     });
 }
 
-- (void)addAlbumToListWithAssetType:(PHAssetCollectionType)type subtype:(PHAssetCollectionSubtype)subtype
+- (void)addAlbumToListWithSubtype:(PHAssetCollectionSubtype)subtype
 {
-    PHFetchResult<PHAssetCollection *> *colllections = [PHAssetCollection fetchAssetCollectionsWithType:type subtype:subtype options:nil];
+    PHFetchResult<PHAssetCollection *> *collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:subtype options:nil];
+    for (PHAssetCollection *collection in collections)
+    {
+        if ([collection.localizedTitle containsString:@"最近删除"]
+            || [collection.localizedTitle containsString:@"实况照片"]
+            || [collection.localizedTitle containsString:@"连拍快照"]
+            || [collection.localizedTitle containsString:@"视频"]
+            ) {
+            continue;
+        }
+        SEAlbumModel *model = SEAlbumModel.alloc.init;
+        model.collection = collection;
+        if (![model.collectionNumber isEqualToString:@"0"])
+        {
+            [self.assetCollectionList insertObject:model atIndex:0];
+        }
+    }
+}
+
+#pragma mark - UICollectionViewDataSource, UICollectionViewDelegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.albumModel.assets.count + 1;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SEAlbumCollectionViewCell *cell = [SEAlbumCollectionViewCell dequeueReusableCellWithCollectionView:collectionView forIndexPath:indexPath];
+    if (indexPath.row == 0)
+    {
+        [cell loadCamera];
+    }
+    else
+    {
+        cell.row = indexPath.row;
+        cell.asset = self.albumModel.assets[indexPath.row - 1];
+        [cell loadImage:indexPath];
+        cell.isSelect = [self.albumModel.selectRows containsObject:@(indexPath.row)];
+        
+        __weak typeof(self) weakSelf = self;
+        __weak typeof(cell) weakCell = cell;
+        cell.cellSelectedBlock = ^(PHAsset *asset) {
+            BOOL isReloadCollectionView = [weakSelf isReloadCollectionViewAtIndexPath:indexPath];;
+            if (isReloadCollectionView) {
+                [weakSelf.albumCollectionView reloadData];
+            } else {
+                weakCell.isSelect = [weakSelf.albumModel.selectRows containsObject:@(indexPath.row)];
+            }
+        };
+    }
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        SECameraViewController *controller = [[SECameraViewController alloc] init];
+        [controller savePhotoSuccessBlock:^{
+            [self changeNumber];
+        }];
+        controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)changeNumber
+{
+    PHFetchResult<PHAssetCollection *> *colllections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
     for (PHAssetCollection *colllection in colllections)
     {
         SEAlbumModel *model = SEAlbumModel.alloc.init;
@@ -143,46 +208,18 @@
             [self.assetCollectionList addObject:model];
         }
     }
-}
-
-#pragma mark - UICollectionViewDataSource, UICollectionViewDelegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return self.albumModel.assets.count;
-}
-
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    SEAlbumCollectionViewCell *cell = [SEAlbumCollectionViewCell dequeueReusableCellWithCollectionView:collectionView forIndexPath:indexPath];
-    cell.row = indexPath.row;
-    cell.asset = self.albumModel.assets[indexPath.row];
-    [cell loadImage:indexPath];
-    cell.isSelect = [self.albumModel.selectRows containsObject:@(indexPath.row)];
     
-    __weak typeof(self) weakSelf = self;
-    __weak typeof(cell) weakCell = cell;
-    cell.cellSelectedBlock = ^(PHAsset *asset) {
-        BOOL isReloadCollectionView = [weakSelf isReloadCollectionViewAtIndexPath:indexPath];;
-        if (isReloadCollectionView) {
-            [weakSelf.albumCollectionView reloadData];
-        } else {
-            weakCell.isSelect = [weakSelf.albumModel.selectRows containsObject:@(indexPath.row)];
+    for (SEAlbumModel * model in self.assetCollectionList) {
+        if ([model.collectionTitle containsString:@"最近添加"] || [model.collectionTitle containsString:@"最近项目"]) {
+            NSInteger maxNum = model.collectionNumber.integerValue;
+            NSNumber *pictureNum = @(maxNum);
+            [model.selectRows addObject:pictureNum];
+            
+            maxNum += 1;
+            model.collectionNumber = [NSString stringWithFormat:@"%zd",maxNum];
         }
-    };
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-//    SEAlbumCollectionViewCell *cell = (SEAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    BOOL isReloadCollectionView = [self isReloadCollectionViewAtIndexPath:indexPath];
-//    cell.isSelect = [self.albumModel.selectRows containsObject:@(indexPath.row)];
-//    if (isReloadCollectionView) {
-//        [self.albumCollectionView reloadData];
-//    }
-    SECameraViewController *controller = [[SECameraViewController alloc] init];
-    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:controller animated:YES completion:nil];
+    }
+    SEPhotoDefaultManager.choiceCount++;
 }
 
 - (BOOL)isReloadCollectionViewAtIndexPath:(NSIndexPath *)indexPath

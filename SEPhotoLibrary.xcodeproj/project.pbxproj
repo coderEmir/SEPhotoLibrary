@@ -25,6 +25,7 @@
 		A0C7441B257DC9C900AB707B /* SEAlbumListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441A257DC9C900AB707B /* SEAlbumListViewCell.m */; };
 		A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441E257DCE8B00AB707B /* SEAlbumView.m */; };
 		A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C74422257E033C00AB707B /* SECameraViewController.m */; };
+		A0C74492257E2E8F00AB707B /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C74491257E2E8F00AB707B /* camera.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		A0C7441E257DCE8B00AB707B /* SEAlbumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumView.m; sourceTree = "<group>"; };
 		A0C74421257E033C00AB707B /* SECameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SECameraViewController.h; sourceTree = "<group>"; };
 		A0C74422257E033C00AB707B /* SECameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SECameraViewController.m; sourceTree = "<group>"; };
+		A0C74491257E2E8F00AB707B /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		A0A0BBC7255E6875008597BB /* Album */ = {
 			isa = PBXGroup;
 			children = (
+				A0C74490257E2E8300AB707B /* assets */,
 				A0A0BBD9255E6A7A008597BB /* main */,
 				A0A0BBCA255E68C6008597BB /* model */,
 				A0A0BBC9255E68B5008597BB /* view */,
@@ -183,6 +186,14 @@
 			path = albumListView;
 			sourceTree = "<group>";
 		};
+		A0C74490257E2E8300AB707B /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A0C74491257E2E8F00AB707B /* camera.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,6 +256,7 @@
 				A0A0BBE3255FC874008597BB /* test2.png in Resources */,
 				A0B3FDA4255ABB6E0072BCED /* Assets.xcassets in Resources */,
 				A0A0BBE1255FC85E008597BB /* test1.png in Resources */,
+				A0C74492257E2E8F00AB707B /* camera.png in Resources */,
 				A0B3FDA2255ABB6B0072BCED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
