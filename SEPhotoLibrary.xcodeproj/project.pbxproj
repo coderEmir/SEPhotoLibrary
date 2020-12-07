@@ -13,8 +13,6 @@
 		A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBD7255E6A45008597BB /* SEPhotoModel.m */; };
 		A0A0BBDC255E713F008597BB /* SEAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBDB255E713F008597BB /* SEAlbumViewController.m */; };
 		A0A0BBDF255F63AB008597BB /* SEAlbumCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBDE255F63AB008597BB /* SEAlbumCollectionViewCell.m */; };
-		A0A0BBE1255FC85E008597BB /* test1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A0BBE0255FC85D008597BB /* test1.png */; };
-		A0A0BBE3255FC874008597BB /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A0BBE2255FC874008597BB /* test2.png */; };
 		A0B3FD99255ABB6B0072BCED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B3FD98255ABB6B0072BCED /* AppDelegate.m */; };
 		A0B3FD9F255ABB6B0072BCED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B3FD9E255ABB6B0072BCED /* ViewController.m */; };
 		A0B3FDA2255ABB6B0072BCED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B3FDA0255ABB6B0072BCED /* Main.storyboard */; };
@@ -41,8 +39,6 @@
 		A0A0BBDB255E713F008597BB /* SEAlbumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumViewController.m; sourceTree = "<group>"; };
 		A0A0BBDD255F63AB008597BB /* SEAlbumCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumCollectionViewCell.h; sourceTree = "<group>"; };
 		A0A0BBDE255F63AB008597BB /* SEAlbumCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumCollectionViewCell.m; sourceTree = "<group>"; };
-		A0A0BBE0255FC85D008597BB /* test1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test1.png; sourceTree = "<group>"; };
-		A0A0BBE2255FC874008597BB /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2.png; sourceTree = "<group>"; };
 		A0B3FD94255ABB6B0072BCED /* SEPhotoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SEPhotoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B3FD97255ABB6B0072BCED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A0B3FD98255ABB6B0072BCED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -157,8 +153,6 @@
 		A0B3FD96255ABB6B0072BCED /* SEPhotoLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				A0A0BBE0255FC85D008597BB /* test1.png */,
-				A0A0BBE2255FC874008597BB /* test2.png */,
 				A0A0BBC7255E6875008597BB /* Album */,
 				A0B3FD97255ABB6B0072BCED /* AppDelegate.h */,
 				A0B3FD98255ABB6B0072BCED /* AppDelegate.m */,
@@ -253,9 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B3FDA7255ABB6E0072BCED /* LaunchScreen.storyboard in Resources */,
-				A0A0BBE3255FC874008597BB /* test2.png in Resources */,
 				A0B3FDA4255ABB6E0072BCED /* Assets.xcassets in Resources */,
-				A0A0BBE1255FC85E008597BB /* test1.png in Resources */,
 				A0C74492257E2E8F00AB707B /* camera.png in Resources */,
 				A0B3FDA2255ABB6B0072BCED /* Main.storyboard in Resources */,
 			);

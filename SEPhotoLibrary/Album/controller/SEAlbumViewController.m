@@ -188,38 +188,46 @@
 {
     if (indexPath.row == 0) {
         SECameraViewController *controller = [[SECameraViewController alloc] init];
+        __weak typeof(self) weakSelf = self;
         [controller savePhotoSuccessBlock:^{
-            [self changeNumber];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [weakSelf updatePhotoCollection];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SEPhotoDefaultManager.choiceCount++;
+                    [weakSelf.albumCollectionView reloadData];
+                });
+            });
+            
         }];
         controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:controller animated:YES completion:nil];
     }
 }
 
-- (void)changeNumber
+- (void)updatePhotoCollection
 {
-    PHFetchResult<PHAssetCollection *> *colllections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
-    for (PHAssetCollection *colllection in colllections)
+    PHFetchResult<PHAssetCollection *> *collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumSyncedAlbum options:nil];
+    NSMutableDictionary *collectionDic = NSMutableDictionary.dictionary;
+
+    for (PHAssetCollection *collection in collections)
     {
-        SEAlbumModel *model = SEAlbumModel.alloc.init;
-        model.collection = colllection;
-        if (![model.collectionNumber isEqualToString:@"0"])
-        {
-            [self.assetCollectionList addObject:model];
+        if ([collection.localizedTitle containsString:@"最近添加"]
+            || [collection.localizedTitle containsString:@"最近项目"]
+            ) {
+            collectionDic[collection.localizedTitle] = collection;
         }
+        if (collectionDic.allKeys.count == 2) break;
     }
     
-    for (SEAlbumModel * model in self.assetCollectionList) {
-        if ([model.collectionTitle containsString:@"最近添加"] || [model.collectionTitle containsString:@"最近项目"]) {
-            NSInteger maxNum = model.collectionNumber.integerValue;
-            NSNumber *pictureNum = @(maxNum);
-            [model.selectRows addObject:pictureNum];
-            
-            maxNum += 1;
-            model.collectionNumber = [NSString stringWithFormat:@"%zd",maxNum];
+    __block NSInteger updateMaxCollectionNum = collectionDic.allKeys.count;
+    [self.assetCollectionList enumerateObjectsUsingBlock:^(SEAlbumModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([collectionDic.allKeys containsObject:model.collectionTitle]) {
+            updateMaxCollectionNum --;
+            model.collection = collectionDic[model.collectionTitle];
+            [model.selectRows addObject:@(model.collectionNumber.intValue)];
         }
-    }
-    SEPhotoDefaultManager.choiceCount++;
+        *stop = updateMaxCollectionNum == 0;
+    }];
 }
 
 - (BOOL)isReloadCollectionViewAtIndexPath:(NSIndexPath *)indexPath

@@ -26,8 +26,6 @@ typedef void(^ChoiceCountChangedBlock)(NSInteger choiceCount);
 
 + (instancetype)defaultManager;
 
-- (void)saveCameraImage;
-
 @end
 
 NS_ASSUME_NONNULL_END
