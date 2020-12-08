@@ -26,6 +26,15 @@
 		A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441E257DCE8B00AB707B /* SEAlbumView.m */; };
 		A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C74422257E033C00AB707B /* SECameraViewController.m */; };
 		A0C74492257E2E8F00AB707B /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C74491257E2E8F00AB707B /* camera.png */; };
+		A0CCCA9B257F1A0E0000E241 /* TOCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */; };
+		A0CCCA9F257F1A280000E241 /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCA9E257F1A280000E241 /* TOCropView.m */; };
+		A0CCCAA3257F1A370000E241 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */; };
+		A0CCCAA7257F1A430000E241 /* TOCropViewControllerTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAA6257F1A430000E241 /* TOCropViewControllerTransitioning.m */; };
+		A0CCCAAB257F1A590000E241 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAAA257F1A590000E241 /* TOActivityCroppedImageProvider.m */; };
+		A0CCCAAF257F1A6D0000E241 /* UIImage+CropRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAAE257F1A6D0000E241 /* UIImage+CropRotate.m */; };
+		A0CCCAB3257F1A7C0000E241 /* TOCroppedImageAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */; };
+		A0CCCAB9257F1C6F0000E241 /* TOCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAB7257F1C6F0000E241 /* TOCropOverlayView.m */; };
+		A0CCCABD257F1C7F0000E241 /* TOCropScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCABB257F1C7F0000E241 /* TOCropScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +73,24 @@
 		A0C74421257E033C00AB707B /* SECameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SECameraViewController.h; sourceTree = "<group>"; };
 		A0C74422257E033C00AB707B /* SECameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SECameraViewController.m; sourceTree = "<group>"; };
 		A0C74491257E2E8F00AB707B /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		A0CCCA99257F1A0E0000E241 /* TOCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewController.h; sourceTree = "<group>"; };
+		A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewController.m; sourceTree = "<group>"; };
+		A0CCCA9D257F1A270000E241 /* TOCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropView.h; sourceTree = "<group>"; };
+		A0CCCA9E257F1A280000E241 /* TOCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropView.m; sourceTree = "<group>"; };
+		A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropToolbar.m; sourceTree = "<group>"; };
+		A0CCCAA2257F1A370000E241 /* TOCropToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropToolbar.h; sourceTree = "<group>"; };
+		A0CCCAA5257F1A430000E241 /* TOCropViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewControllerTransitioning.h; sourceTree = "<group>"; };
+		A0CCCAA6257F1A430000E241 /* TOCropViewControllerTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewControllerTransitioning.m; sourceTree = "<group>"; };
+		A0CCCAA9257F1A590000E241 /* TOActivityCroppedImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOActivityCroppedImageProvider.h; sourceTree = "<group>"; };
+		A0CCCAAA257F1A590000E241 /* TOActivityCroppedImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOActivityCroppedImageProvider.m; sourceTree = "<group>"; };
+		A0CCCAAD257F1A6D0000E241 /* UIImage+CropRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CropRotate.h"; sourceTree = "<group>"; };
+		A0CCCAAE257F1A6D0000E241 /* UIImage+CropRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CropRotate.m"; sourceTree = "<group>"; };
+		A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCroppedImageAttributes.m; sourceTree = "<group>"; };
+		A0CCCAB2257F1A7C0000E241 /* TOCroppedImageAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCroppedImageAttributes.h; sourceTree = "<group>"; };
+		A0CCCAB7257F1C6F0000E241 /* TOCropOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropOverlayView.m; sourceTree = "<group>"; };
+		A0CCCAB8257F1C6F0000E241 /* TOCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropOverlayView.h; sourceTree = "<group>"; };
+		A0CCCABB257F1C7F0000E241 /* TOCropScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropScrollView.m; sourceTree = "<group>"; };
+		A0CCCABC257F1C7F0000E241 /* TOCropScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropScrollView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +107,8 @@
 		90822A06257E86FB0071D762 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				A0CCCAAD257F1A6D0000E241 /* UIImage+CropRotate.h */,
+				A0CCCAAE257F1A6D0000E241 /* UIImage+CropRotate.m */,
 				90822A08257E87160071D762 /* UIImage+Extension.h */,
 				90822A07257E87160071D762 /* UIImage+Extension.m */,
 			);
@@ -106,8 +135,7 @@
 				A0A0BBDB255E713F008597BB /* SEAlbumViewController.m */,
 				A0C74421257E033C00AB707B /* SECameraViewController.h */,
 				A0C74422257E033C00AB707B /* SECameraViewController.m */,
-				90822A03257E7CC60071D762 /* SEEditPictureViewController.h */,
-				90822A04257E7CC60071D762 /* SEEditPictureViewController.m */,
+				A0CCCA98257F19D40000E241 /* editPicture */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -115,6 +143,7 @@
 		A0A0BBC9255E68B5008597BB /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A0CCCAB6257F1C610000E241 /* editPicture */,
 				A0C74413257DC96E00AB707B /* albumListView */,
 				A0A0BBDD255F63AB008597BB /* SEAlbumCollectionViewCell.h */,
 				A0A0BBDE255F63AB008597BB /* SEAlbumCollectionViewCell.m */,
@@ -206,6 +235,38 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		A0CCCA98257F19D40000E241 /* editPicture */ = {
+			isa = PBXGroup;
+			children = (
+				90822A03257E7CC60071D762 /* SEEditPictureViewController.h */,
+				90822A04257E7CC60071D762 /* SEEditPictureViewController.m */,
+				A0CCCAB2257F1A7C0000E241 /* TOCroppedImageAttributes.h */,
+				A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */,
+				A0CCCAA9257F1A590000E241 /* TOActivityCroppedImageProvider.h */,
+				A0CCCAAA257F1A590000E241 /* TOActivityCroppedImageProvider.m */,
+				A0CCCAA5257F1A430000E241 /* TOCropViewControllerTransitioning.h */,
+				A0CCCAA6257F1A430000E241 /* TOCropViewControllerTransitioning.m */,
+				A0CCCAA2257F1A370000E241 /* TOCropToolbar.h */,
+				A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */,
+				A0CCCA9D257F1A270000E241 /* TOCropView.h */,
+				A0CCCA9E257F1A280000E241 /* TOCropView.m */,
+				A0CCCA99257F1A0E0000E241 /* TOCropViewController.h */,
+				A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */,
+			);
+			path = editPicture;
+			sourceTree = "<group>";
+		};
+		A0CCCAB6257F1C610000E241 /* editPicture */ = {
+			isa = PBXGroup;
+			children = (
+				A0CCCABC257F1C7F0000E241 /* TOCropScrollView.h */,
+				A0CCCABB257F1C7F0000E241 /* TOCropScrollView.m */,
+				A0CCCAB8257F1C6F0000E241 /* TOCropOverlayView.h */,
+				A0CCCAB7257F1C6F0000E241 /* TOCropOverlayView.m */,
+			);
+			path = editPicture;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,15 +341,24 @@
 			files = (
 				90822A09257E87160071D762 /* UIImage+Extension.m in Sources */,
 				A0C74416257DC9B800AB707B /* SEAlbumListView.m in Sources */,
+				A0CCCAA3257F1A370000E241 /* TOCropToolbar.m in Sources */,
 				A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */,
+				A0CCCAAB257F1A590000E241 /* TOActivityCroppedImageProvider.m in Sources */,
 				A0C7441B257DC9C900AB707B /* SEAlbumListViewCell.m in Sources */,
+				A0CCCA9F257F1A280000E241 /* TOCropView.m in Sources */,
+				A0CCCAB9257F1C6F0000E241 /* TOCropOverlayView.m in Sources */,
 				A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */,
 				A0B3FD9F255ABB6B0072BCED /* ViewController.m in Sources */,
 				A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */,
+				A0CCCA9B257F1A0E0000E241 /* TOCropViewController.m in Sources */,
+				A0CCCAA7257F1A430000E241 /* TOCropViewControllerTransitioning.m in Sources */,
 				A0A0BBDC255E713F008597BB /* SEAlbumViewController.m in Sources */,
+				A0CCCABD257F1C7F0000E241 /* TOCropScrollView.m in Sources */,
 				90822A05257E7CC60071D762 /* SEEditPictureViewController.m in Sources */,
 				A0B3FD99255ABB6B0072BCED /* AppDelegate.m in Sources */,
+				A0CCCAAF257F1A6D0000E241 /* UIImage+CropRotate.m in Sources */,
 				A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */,
+				A0CCCAB3257F1A7C0000E241 /* TOCroppedImageAttributes.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,
 				A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */,
 				A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */,

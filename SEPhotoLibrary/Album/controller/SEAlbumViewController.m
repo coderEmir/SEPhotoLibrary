@@ -20,7 +20,7 @@
 
 #import "SEAlbumView.h"
 
-@interface SEAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface SEAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, TOCropViewControllerDelegate>
 
 @property (nonatomic ,strong) UIButton *showAlbumButton;
 
@@ -87,7 +87,7 @@
             [weakSelf.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         } else {
-            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"确定%ld/%ld", SEPhotoDefaultManager.choiceCount, SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
+            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"确定%ld/%ld", (long)choiceCount, (long)SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     };
@@ -215,24 +215,26 @@
     [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         UIImage * result = [UIImage imageWithData:imageData];
         if (result) {
-            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
-            [controller willEditPicture:result editComplete:^(UIImage * _Nullable image) {
-                [self saveImage:image];
-            }];
-            [self.navigationController pushViewController:controller animated:YES];
+            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] initWithImage:result aspectRatioStle:TOCropViewControllerAspectRatioSquare];
+            controller.delegate = self;
+            controller.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:controller animated:YES completion:nil];
         }
     }];
+}
+
+- (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle {
+
     
-//    [PHCachingImageManager.defaultManager requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-//        if (result) {
-//            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
-//            [controller willEditPicture:result editComplete:^(UIImage * _Nullable image) {
-//                [self saveImage:image];
-//            }];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//
-//    }];
+//    self.cropImageview.image = image;
+//    self.navigationItem.rightBarButtonItem.enabled = YES;
+//    CGRect viewFrame = [self.view convertRect:self.cropImageview.frame toView:self.navigationController.view];
+//    [cropViewController dismissAnimatedFromParentViewController:self
+//                                               withCroppedImage:image
+//                                                        toFrame:viewFrame
+//                                                     completion:^{
+//                                                     }];
+    NSLog(@"最后");
 }
 
 - (void)saveImage:(UIImage *)UIImage

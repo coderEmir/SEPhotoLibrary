@@ -36,7 +36,7 @@
         self.imageView = [[UIImageView alloc] initWithImage:_originalImage];
         CGFloat img_width = ScreenWidth;
         CGFloat img_height = _originalImage.size.height * (img_width/_originalImage.size.width);
-        CGFloat img_y= (img_height - self.view.bounds.size.width)/2.0;
+//        CGFloat img_y= (img_height - self.view.bounds.size.width)/2.0;
         _imageView.frame = CGRectMake(0,0, img_width, img_height);
         _imageView.userInteractionEnabled = YES;
         [self.scrollView addSubview:_imageView];

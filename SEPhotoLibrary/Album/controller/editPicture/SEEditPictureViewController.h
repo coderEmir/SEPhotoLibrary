@@ -6,14 +6,14 @@
 //  Copyright © 2020 seeEmil. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TOCropViewController.h"
 
 typedef void(^EditCompleteBlock)(UIImage * _Nullable image);
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SEEditPictureViewController : UIViewController
+@interface SEEditPictureViewController : TOCropViewController
 
-- (void)willEditPicture:(UIImage *)image editComplete:(EditCompleteBlock)block;
+//- (void)willEditComplete:(EditCompleteBlock)block;
 
 @end
 
