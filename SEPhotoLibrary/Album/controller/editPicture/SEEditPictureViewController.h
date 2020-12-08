@@ -6,14 +6,17 @@
 //  Copyright © 2020 seeEmil. All rights reserved.
 //
 
-#import "TOCropViewController.h"
+#import <UIKit/UIKit.h>
+@class PHAsset, SEPhotoModel;
 
 typedef void(^EditCompleteBlock)(UIImage * _Nullable image);
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SEEditPictureViewController : TOCropViewController
+@interface SEEditPictureViewController : UIViewController
 
-//- (void)willEditComplete:(EditCompleteBlock)block;
+- (void)previewPicture:(UIImage *)image;
+
+- (void)previewPictureCollection:(NSArray <SEPhotoModel *>*)pictureCollection specifySubscript:(NSInteger)index;
 
 @end
 

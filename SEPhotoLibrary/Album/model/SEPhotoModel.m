@@ -19,7 +19,7 @@
         options.synchronous = YES;
         options.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
         options.resizeMode = PHImageRequestOptionsResizeModeFast;
-        
+        options.networkAccessAllowed = YES;
         /// 当选择后获取原图
         [[PHCachingImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             self.highDefinitionImage = result;

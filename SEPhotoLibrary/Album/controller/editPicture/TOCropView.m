@@ -187,7 +187,6 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     [self addSubview:self.foregroundContainerView];
     
     self.gridOverlayView = [[TOCropOverlayView alloc] initWithFrame:self.foregroundContainerView.frame];
-    
     self.gridOverlayView.userInteractionEnabled = NO;
     self.gridOverlayView.gridHidden = YES;
     [self addSubview:self.gridOverlayView];
@@ -722,7 +721,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
                                                     CGRectGetMinX(_cropBoxFrame),
                                                     CGRectGetMaxY(self.bounds) - CGRectGetMaxY(_cropBoxFrame),
                                                     CGRectGetMaxX(self.bounds) - CGRectGetMaxX(_cropBoxFrame)};
-    
+
     //if necessary, work out the new minimum size of the scroll view so it fills the crop box
     CGSize imageSize = self.backgroundContainerView.bounds.size;
     CGFloat scale = MAX(cropBoxFrame.size.height/imageSize.height, cropBoxFrame.size.width/imageSize.width);

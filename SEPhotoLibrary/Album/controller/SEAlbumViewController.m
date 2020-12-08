@@ -20,7 +20,7 @@
 
 #import "SEAlbumView.h"
 
-@interface SEAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, TOCropViewControllerDelegate>
+@interface SEAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic ,strong) UIButton *showAlbumButton;
 
@@ -84,10 +84,10 @@
     SEPhotoDefaultManager.choiceCountChangedBlock = ^(NSInteger choiceCount) {
         weakSelf.confirmButton.enabled = choiceCount != 0;
         if (choiceCount == 0) {
-            [weakSelf.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+            [weakSelf.confirmButton setTitle:@"预览" forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         } else {
-            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"确定%ld/%ld", (long)choiceCount, (long)SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
+            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"预览%ld/%ld", (long)choiceCount, (long)SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     };
@@ -203,38 +203,37 @@
         controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:controller animated:YES completion:nil];
     }
-    // TODO: 进入图片编辑
+    
+    
+    // TODO: 进入图片预览
+    // 多图预览
+    if ([self.albumModel.selectRows containsObject:@(indexPath.row)])
+    {
+        [self previewPictureWithSpecifySubscript:indexPath.row];
+        return;
+    }
+    // 单图预览
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    // 同步获得图片, 只会返回1张图片
-    options.synchronous = NO;
+    options.synchronous = YES;
     options.resizeMode = PHImageRequestOptionsResizeModeNone;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     options.networkAccessAllowed = YES;
     PHAsset *asset = self.albumModel.assets[indexPath.row - 1];
     
     [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        UIImage * result = [UIImage imageWithData:imageData];
-        if (result) {
-            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] initWithImage:result aspectRatioStle:TOCropViewControllerAspectRatioSquare];
-            controller.delegate = self;
-            controller.modalPresentationStyle = UIModalPresentationFullScreen;
+        UIImage * previewPicture = [UIImage imageWithData:imageData];
+        if (previewPicture)
+        {
+            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+            controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            
+            if (![self.albumModel.selectRows containsObject:@(indexPath.row)]) {
+                [controller previewPicture:previewPicture];
+            }
+            
             [self presentViewController:controller animated:YES completion:nil];
         }
     }];
-}
-
-- (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle {
-
-    
-//    self.cropImageview.image = image;
-//    self.navigationItem.rightBarButtonItem.enabled = YES;
-//    CGRect viewFrame = [self.view convertRect:self.cropImageview.frame toView:self.navigationController.view];
-//    [cropViewController dismissAnimatedFromParentViewController:self
-//                                               withCroppedImage:image
-//                                                        toFrame:viewFrame
-//                                                     completion:^{
-//                                                     }];
-    NSLog(@"最后");
 }
 
 - (void)saveImage:(UIImage *)UIImage
@@ -304,28 +303,40 @@
     _albumModel = nil;
 }
 
-- (void)confirmAction:(UIButton *)btn
+- (void)previewAction:(UIButton *)btn
+{
+    [self previewPictureWithSpecifySubscript:0];
+}
+
+- (void)previewPictureWithSpecifySubscript:(NSInteger)index
 {
     if (SEPhotoDefaultManager.choiceCount == 0) return;
-    btn.enabled = NO;
     NSMutableArray<SEPhotoModel *> *photoList = NSMutableArray.array;
-    __weak typeof(self) weakSelf = self;
+
     for (SEAlbumModel *albumModel in self.assetCollectionList) {
         for (NSNumber *row in albumModel.selectRows) {
             SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
             __weak typeof(photoModel) weakPhotoModel = photoModel;
+
+            BOOL isCurrentModel = self.albumModel == albumModel;
             photoModel.photoActionBlock = ^{
                 [photoList addObject:weakPhotoModel];
+                
+                NSInteger specifySubscript = 0;
+                if (isCurrentModel && row.integerValue == index) {
+                    
+                    specifySubscript = photoList.count - 1;
+                }
+                
                 if (photoList.count == SEPhotoDefaultManager.choiceCount) {
-                    btn.enabled = YES;
-                    SEPhotoDefaultManager.photoModelList = photoList;
-                    if (weakSelf.confirmActionBlock) {
-                        weakSelf.confirmActionBlock();
-                    }
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                    SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+                    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                    
+                    [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
+                    [self presentViewController:controller animated:YES completion:nil];
                 }
             };
-            photoModel.asset = albumModel.assets[row.integerValue];
+            photoModel.asset = albumModel.assets[row.integerValue - 1];
         }
     }
 }
@@ -398,12 +409,12 @@
 -(UIButton *)confirmButton {
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_confirmButton addTarget:self action:@selector(previewAction:) forControlEvents:UIControlEventTouchUpInside];
         _confirmButton.enabled = NO;
         _confirmButton.frame = CGRectMake(0, 0, 80, 45);
         _confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+        [_confirmButton setTitle:@"预览" forState:UIControlStateNormal];
         [_confirmButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     }
     

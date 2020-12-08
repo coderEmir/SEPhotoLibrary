@@ -5,18 +5,41 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "CAA84AC7-E2AE-4302-B75B-70717D19D33D"
+            uuid = "95FE0F2A-1184-4C5F-9CA2-155D29461348"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SEPhotoLibrary/Album/controller/SEAlbumViewController.m"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.RuntimeIssueBreakpoint">
+         <BreakpointContent
+            uuid = "9F71BAF1-4BDD-4131-AD6A-48AD0129D363"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            breakpointStackSelectionBehavior = "1"
+            type = "65535">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7AB75683-99F5-4A43-9332-0C67B3CDB713"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SEPhotoLibrary/Album/view/editPicture/SDPhotoBrowser/SDPhotoBrowser.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "-cropViewController:didCropToImage:withRect:angle:"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-photoClick:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -365,13 +365,6 @@
         default:
             return;
     }
-    
-//    if (self.cropView.cropBoxAspectRatioIsPortrait) {
-//        CGFloat width = aspectRatio.width;
-//        aspectRatio.width = aspectRatio.height;
-//        aspectRatio.height = width;
-//    }
-
     [self.cropView setAspectLockEnabledWithAspectRatio:aspectRatio animated:YES];
     self.toolbar.clampButtonGlowing = YES;
 }
@@ -475,7 +468,7 @@
     return self.transitionController;
 }
 
-#pragma mark - Button Feedback -
+#pragma mark - Button Feedback 
 - (void)cancelButtonTapped
 {
     if ([self.delegate respondsToSelector:@selector(cropViewController:didFinishCancelled:)]) {
