@@ -10,6 +10,8 @@
 
 #import "SECameraViewController.h"
 
+#import "SEEditPictureViewController.h"
+
 #import "SEAlbumCollectionViewCell.h"
 
 #import "SEPhotoManager.h"
@@ -197,12 +199,57 @@
                     [weakSelf.albumCollectionView reloadData];
                 });
             });
-            
         }];
         controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:controller animated:YES completion:nil];
     }
+    // TODO: 进入图片编辑
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    // 同步获得图片, 只会返回1张图片
+    options.synchronous = NO;
+    options.resizeMode = PHImageRequestOptionsResizeModeNone;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.networkAccessAllowed = YES;
+    PHAsset *asset = self.albumModel.assets[indexPath.row - 1];
+    
+    [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        UIImage * result = [UIImage imageWithData:imageData];
+        if (result) {
+            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+            [controller willEditPicture:result editComplete:^(UIImage * _Nullable image) {
+                [self saveImage:image];
+            }];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }];
+    
+//    [PHCachingImageManager.defaultManager requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+//        if (result) {
+//            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+//            [controller willEditPicture:result editComplete:^(UIImage * _Nullable image) {
+//                [self saveImage:image];
+//            }];
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//
+//    }];
 }
+
+- (void)saveImage:(UIImage *)UIImage
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
+            [PHAssetChangeRequest creationRequestForAssetFromImage:UIImage];
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"%@",@"保存失败");
+            } else {
+                [self updatePhotoCollection];
+            }
+        }];
+    });
+}
+
 
 - (void)updatePhotoCollection
 {
@@ -245,21 +292,6 @@
         SEPhotoDefaultManager.choiceCount++;
         return SEPhotoDefaultManager.choiceCount == SEPhotoDefaultManager.maxImageCount;
     }
-}
-
-- (void)saveImage:(UIImage *)UIImage
-{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
-            [PHAssetChangeRequest creationRequestForAssetFromImage:UIImage];
-        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"%@",@"保存失败");
-            } else {
-                NSLog(@"%@",@"保存成功");
-            }
-        }];
-    });
 }
 
 #pragma mark - event

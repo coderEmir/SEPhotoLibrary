@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    // OC 语法规定, 对象中的结构体属性中的属性是不允许作单独修改的
+    // OC 语法规定, 对象中的结构体属性中的属性是不允许作单独修改
     btn.frame = (CGRect){100, 100 ,100, 100};
     [btn addTarget:self action:@selector(btnEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
