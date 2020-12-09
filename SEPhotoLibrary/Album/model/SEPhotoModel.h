@@ -19,6 +19,9 @@ typedef void(^PhotoActionBlock)(void);
 @property (nonatomic, strong) UIImage *highDefinitionImage;
 /// 获取图片成功事件
 @property (nonatomic, copy) PhotoActionBlock photoActionBlock;
+
+@property (nonatomic ,assign) NSInteger photoIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

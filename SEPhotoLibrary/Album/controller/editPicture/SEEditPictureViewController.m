@@ -47,15 +47,16 @@
     [photoBrowser show];
 }
 
-- (void)previewPictureCollection:(NSArray <SEPhotoModel *>*)pictureCollection specifySubscript:(NSInteger)index
+- (void)previewPictureCollection:(NSMutableArray <UIImage *>*)pictureCollection specifySubscript:(NSInteger)index
 {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
        
-        for (SEPhotoModel * _Nonnull model in pictureCollection) {
-            [weakSelf.placeholderImages addObject:model.highDefinitionImage];
+        for (UIImage * _Nonnull image in pictureCollection) {
+            [weakSelf.placeholderImages addObject:image];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            [pictureCollection removeAllObjects];
             SDPhotoBrowser *photoBrowser = [SDPhotoBrowser new];
             photoBrowser.delegate = weakSelf;
             photoBrowser.currentImageIndex = index;
@@ -65,14 +66,12 @@
         });
     });
 }
-
 #pragma mark  SDPhotoBrowserDelegate
 
 // 返回临时占位图片（即原来的小图）
 - (UIImage *)photoBrowser:(SDPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
 {
     return self.placeholderImages[index];
-
 }
 
 - (void)photoBrowserDismiss

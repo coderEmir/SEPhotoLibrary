@@ -42,6 +42,7 @@
 @property (nonatomic ,assign) BOOL isFromTop;
 
 @property (nonatomic ,assign) BOOL isShowFilter;
+
 @end
 
 @implementation SEAlbumViewController
@@ -311,32 +312,46 @@
 - (void)previewPictureWithSpecifySubscript:(NSInteger)index
 {
     if (SEPhotoDefaultManager.choiceCount == 0) return;
-    NSMutableArray<SEPhotoModel *> *photoList = NSMutableArray.array;
-
+    __block NSMutableArray<UIImage *> *photoList = NSMutableArray.array;
+    __block NSMutableDictionary *photoMdic = NSMutableDictionary.dictionary;
+    
+    NSInteger photoIndex = 0;
+    __block NSInteger rebackCount = 0;
+    __block NSInteger specifySubscript = 0;
+    
     for (SEAlbumModel *albumModel in self.assetCollectionList) {
         for (NSNumber *row in albumModel.selectRows) {
-            SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
-            __weak typeof(photoModel) weakPhotoModel = photoModel;
+             SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
 
-            BOOL isCurrentModel = self.albumModel == albumModel;
+            __weak typeof(photoModel) weakPhotoModel = photoModel;
+            
+            BOOL isSelectPhotoIndex = self.albumModel == albumModel && row.integerValue == index;
+            photoMdic[@(photoIndex)] = [NSData data];
             photoModel.photoActionBlock = ^{
-                [photoList addObject:weakPhotoModel];
                 
-                NSInteger specifySubscript = 0;
-                if (isCurrentModel && row.integerValue == index) {
+                rebackCount ++;
+                
+                photoMdic[@(weakPhotoModel.photoIndex)] = UIImagePNGRepresentation(weakPhotoModel.highDefinitionImage);
+                
+                if (isSelectPhotoIndex) specifySubscript = photoIndex;
+                
+                if (rebackCount == SEPhotoDefaultManager.choiceCount) {
+                    for (NSInteger index = 0; index < photoMdic.allKeys.count; index ++) {
+                        [photoList addObject:[UIImage imageWithData:photoMdic[@(index)]]];
+                    }
+                    [photoMdic removeAllObjects];
+                    photoMdic = nil;
                     
-                    specifySubscript = photoList.count - 1;
-                }
-                
-                if (photoList.count == SEPhotoDefaultManager.choiceCount) {
                     SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
                     controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                    
+
                     [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
                     [self presentViewController:controller animated:YES completion:nil];
                 }
             };
             photoModel.asset = albumModel.assets[row.integerValue - 1];
+            photoModel.photoIndex = photoIndex;
+            photoIndex ++;
         }
     }
 }
