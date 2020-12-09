@@ -28,6 +28,7 @@
 		A05AA080257F6DF60017A6B8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA06A257F6DF60017A6B8 /* UIImageView+WebCache.m */; };
 		A05AA081257F6DF60017A6B8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA06D257F6DF60017A6B8 /* UIView+WebCacheOperation.m */; };
 		A05AA082257F6DF60017A6B8 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA071257F6DF60017A6B8 /* UIButton+WebCache.m */; };
+		A05AA08D2580CCBB0017A6B8 /* SEPreviewPictureController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA08C2580CCBB0017A6B8 /* SEPreviewPictureController.m */; };
 		A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */; };
 		A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBD1255E694C008597BB /* SEPhotoManager.m */; };
 		A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBD4255E6A37008597BB /* SEAlbumModel.m */; };
@@ -54,7 +55,6 @@
 		A0CCCAB3257F1A7C0000E241 /* TOCroppedImageAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */; };
 		A0CCCAB9257F1C6F0000E241 /* TOCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAB7257F1C6F0000E241 /* TOCropOverlayView.m */; };
 		A0CCCABD257F1C7F0000E241 /* TOCropScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCABB257F1C7F0000E241 /* TOCropScrollView.m */; };
-		A0CCCAC6257F5B7C0000E241 /* SEPhotoBroswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAC5257F5B7C0000E241 /* SEPhotoBroswerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +102,8 @@
 		A05AA070257F6DF60017A6B8 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
 		A05AA071257F6DF60017A6B8 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
 		A05AA072257F6DF60017A6B8 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		A05AA08B2580CCBB0017A6B8 /* SEPreviewPictureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEPreviewPictureController.h; sourceTree = "<group>"; };
+		A05AA08C2580CCBB0017A6B8 /* SEPreviewPictureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEPreviewPictureController.m; sourceTree = "<group>"; };
 		A0A0BBCC255E68F8008597BB /* SEAlbumManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumManager.h; sourceTree = "<group>"; };
 		A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumManager.m; sourceTree = "<group>"; };
 		A0A0BBD0255E694C008597BB /* SEPhotoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEPhotoManager.h; sourceTree = "<group>"; };
@@ -151,8 +153,6 @@
 		A0CCCAB8257F1C6F0000E241 /* TOCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropOverlayView.h; sourceTree = "<group>"; };
 		A0CCCABB257F1C7F0000E241 /* TOCropScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropScrollView.m; sourceTree = "<group>"; };
 		A0CCCABC257F1C7F0000E241 /* TOCropScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropScrollView.h; sourceTree = "<group>"; };
-		A0CCCAC4257F5B7C0000E241 /* SEPhotoBroswerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEPhotoBroswerController.h; sourceTree = "<group>"; };
-		A0CCCAC5257F5B7C0000E241 /* SEPhotoBroswerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEPhotoBroswerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,16 +239,69 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		A05AA08A2580CC2D0017A6B8 /* temp */ = {
+			isa = PBXGroup;
+			children = (
+				A0CCCAB2257F1A7C0000E241 /* TOCroppedImageAttributes.h */,
+				A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */,
+				A0CCCAA9257F1A590000E241 /* TOActivityCroppedImageProvider.h */,
+				A0CCCAAA257F1A590000E241 /* TOActivityCroppedImageProvider.m */,
+				A0CCCAA5257F1A430000E241 /* TOCropViewControllerTransitioning.h */,
+				A0CCCAA6257F1A430000E241 /* TOCropViewControllerTransitioning.m */,
+				A0CCCAA2257F1A370000E241 /* TOCropToolbar.h */,
+				A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */,
+				A0CCCA9D257F1A270000E241 /* TOCropView.h */,
+				A0CCCA9E257F1A280000E241 /* TOCropView.m */,
+				A0CCCA99257F1A0E0000E241 /* TOCropViewController.h */,
+				A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */,
+			);
+			path = temp;
+			sourceTree = "<group>";
+		};
+		A05AA08F2580D9260017A6B8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				90822A03257E7CC60071D762 /* SEEditPictureViewController.h */,
+				90822A04257E7CC60071D762 /* SEEditPictureViewController.m */,
+				A05AA08B2580CCBB0017A6B8 /* SEPreviewPictureController.h */,
+				A05AA08C2580CCBB0017A6B8 /* SEPreviewPictureController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		A05AA0902580D9540017A6B8 /* selectPicture */ = {
+			isa = PBXGroup;
+			children = (
+				A0A0BBCA255E68C6008597BB /* model */,
+				A0A0BBC9255E68B5008597BB /* view */,
+				A0A0BBC8255E68AB008597BB /* controller */,
+			);
+			path = selectPicture;
+			sourceTree = "<group>";
+		};
+		A05AA0922580DA270017A6B8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		A05AA0932580DA320017A6B8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		A0A0BBC7255E6875008597BB /* Album */ = {
 			isa = PBXGroup;
 			children = (
+				A05AA0902580D9540017A6B8 /* selectPicture */,
+				A0CCCA98257F19D40000E241 /* editPicture */,
 				A05AA050257F6DF60017A6B8 /* Vender */,
 				90822A06257E86FB0071D762 /* category */,
 				A0C74490257E2E8300AB707B /* assets */,
 				A0A0BBD9255E6A7A008597BB /* main */,
-				A0A0BBCA255E68C6008597BB /* model */,
-				A0A0BBC9255E68B5008597BB /* view */,
-				A0A0BBC8255E68AB008597BB /* controller */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -260,9 +313,6 @@
 				A0A0BBDB255E713F008597BB /* SEAlbumViewController.m */,
 				A0C74421257E033C00AB707B /* SECameraViewController.h */,
 				A0C74422257E033C00AB707B /* SECameraViewController.m */,
-				A0CCCAC4257F5B7C0000E241 /* SEPhotoBroswerController.h */,
-				A0CCCAC5257F5B7C0000E241 /* SEPhotoBroswerController.m */,
-				A0CCCA98257F19D40000E241 /* editPicture */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -270,7 +320,7 @@
 		A0A0BBC9255E68B5008597BB /* view */ = {
 			isa = PBXGroup;
 			children = (
-				A0CCCAB6257F1C610000E241 /* editPicture */,
+				A0CCCAB6257F1C610000E241 /* temp */,
 				A0C74413257DC96E00AB707B /* albumListView */,
 				A0A0BBDD255F63AB008597BB /* SEAlbumCollectionViewCell.h */,
 				A0A0BBDE255F63AB008597BB /* SEAlbumCollectionViewCell.m */,
@@ -365,25 +415,15 @@
 		A0CCCA98257F19D40000E241 /* editPicture */ = {
 			isa = PBXGroup;
 			children = (
-				90822A03257E7CC60071D762 /* SEEditPictureViewController.h */,
-				90822A04257E7CC60071D762 /* SEEditPictureViewController.m */,
-				A0CCCAB2257F1A7C0000E241 /* TOCroppedImageAttributes.h */,
-				A0CCCAB1257F1A7C0000E241 /* TOCroppedImageAttributes.m */,
-				A0CCCAA9257F1A590000E241 /* TOActivityCroppedImageProvider.h */,
-				A0CCCAAA257F1A590000E241 /* TOActivityCroppedImageProvider.m */,
-				A0CCCAA5257F1A430000E241 /* TOCropViewControllerTransitioning.h */,
-				A0CCCAA6257F1A430000E241 /* TOCropViewControllerTransitioning.m */,
-				A0CCCAA2257F1A370000E241 /* TOCropToolbar.h */,
-				A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */,
-				A0CCCA9D257F1A270000E241 /* TOCropView.h */,
-				A0CCCA9E257F1A280000E241 /* TOCropView.m */,
-				A0CCCA99257F1A0E0000E241 /* TOCropViewController.h */,
-				A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */,
+				A05AA0932580DA320017A6B8 /* model */,
+				A05AA0922580DA270017A6B8 /* view */,
+				A05AA08F2580D9260017A6B8 /* controller */,
+				A05AA08A2580CC2D0017A6B8 /* temp */,
 			);
 			path = editPicture;
 			sourceTree = "<group>";
 		};
-		A0CCCAB6257F1C610000E241 /* editPicture */ = {
+		A0CCCAB6257F1C610000E241 /* temp */ = {
 			isa = PBXGroup;
 			children = (
 				A0CCCABC257F1C7F0000E241 /* TOCropScrollView.h */,
@@ -392,7 +432,7 @@
 				A0CCCAB7257F1C6F0000E241 /* TOCropOverlayView.m */,
 				A05AA044257F6AFD0017A6B8 /* SDPhotoBrowser */,
 			);
-			path = editPicture;
+			path = temp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,7 +526,6 @@
 				A05AA078257F6DF60017A6B8 /* SDWebImageDownloader.m in Sources */,
 				A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */,
 				A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */,
-				A0CCCAC6257F5B7C0000E241 /* SEPhotoBroswerController.m in Sources */,
 				A05AA07A257F6DF60017A6B8 /* UIImage+MultiFormat.m in Sources */,
 				A0B3FD9F255ABB6B0072BCED /* ViewController.m in Sources */,
 				A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */,
@@ -503,6 +542,7 @@
 				A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */,
 				A05AA080257F6DF60017A6B8 /* UIImageView+WebCache.m in Sources */,
 				A05AA074257F6DF60017A6B8 /* MKAnnotationView+WebCache.m in Sources */,
+				A05AA08D2580CCBB0017A6B8 /* SEPreviewPictureController.m in Sources */,
 				A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */,
 				A0CCCAB3257F1A7C0000E241 /* TOCroppedImageAttributes.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,

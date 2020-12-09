@@ -10,7 +10,7 @@
 
 #import "SECameraViewController.h"
 
-#import "SEEditPictureViewController.h"
+#import "SEPreviewPictureController.h"
 
 #import "SEAlbumCollectionViewCell.h"
 
@@ -225,7 +225,7 @@
         UIImage * previewPicture = [UIImage imageWithData:imageData];
         if (previewPicture)
         {
-            SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+            SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
             controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
             
             if (![self.albumModel.selectRows containsObject:@(indexPath.row)]) {
@@ -342,7 +342,7 @@
                     [photoMdic removeAllObjects];
                     photoMdic = nil;
                     
-                    SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+                    SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
                     controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
 
                     [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
