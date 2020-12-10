@@ -11,6 +11,8 @@
 		90822A09257E87160071D762 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A07257E87160071D762 /* UIImage+Extension.m */; };
 		90822A512581E7120071D762 /* SEImageNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A4D2581E7120071D762 /* SEImageNavigationView.m */; };
 		90822A522581E7120071D762 /* SEImageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A502581E7120071D762 /* SEImageToolView.m */; };
+		90822A5E2581ECC50071D762 /* SEPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A5A2581ECC50071D762 /* SEPreviewCell.m */; };
+		90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */; };
 		A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */; };
 		A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */; };
 		A05AA04E257F6AFD0017A6B8 /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA048257F6AFD0017A6B8 /* SDBrowserImageView.m */; };
@@ -68,6 +70,10 @@
 		90822A4E2581E7120071D762 /* SEImageNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageNavigationView.h; sourceTree = "<group>"; };
 		90822A4F2581E7120071D762 /* SEImageToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageToolView.h; sourceTree = "<group>"; };
 		90822A502581E7120071D762 /* SEImageToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageToolView.m; sourceTree = "<group>"; };
+		90822A5A2581ECC50071D762 /* SEPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPreviewCell.m; sourceTree = "<group>"; };
+		90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPreviewThumbCell.m; sourceTree = "<group>"; };
+		90822A5C2581ECC50071D762 /* SEPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPreviewCell.h; sourceTree = "<group>"; };
+		90822A5D2581ECC50071D762 /* SEPreviewThumbCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPreviewThumbCell.h; sourceTree = "<group>"; };
 		A05AA045257F6AFD0017A6B8 /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
 		A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
 		A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 		90822A452580F5110071D762 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				90822A532581E8D40071D762 /* cell */,
 				90822A4E2581E7120071D762 /* SEImageNavigationView.h */,
 				90822A4D2581E7120071D762 /* SEImageNavigationView.m */,
 				90822A4F2581E7120071D762 /* SEImageToolView.h */,
@@ -218,6 +225,17 @@
 			children = (
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		90822A532581E8D40071D762 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				90822A5C2581ECC50071D762 /* SEPreviewCell.h */,
+				90822A5A2581ECC50071D762 /* SEPreviewCell.m */,
+				90822A5D2581ECC50071D762 /* SEPreviewThumbCell.h */,
+				90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		A05AA044257F6AFD0017A6B8 /* SDPhotoBrowser */ = {
@@ -559,6 +577,7 @@
 				A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */,
 				A05AA04E257F6AFD0017A6B8 /* SDBrowserImageView.m in Sources */,
 				A05AA077257F6DF60017A6B8 /* UIImageView+HighlightedWebCache.m in Sources */,
+				90822A5E2581ECC50071D762 /* SEPreviewCell.m in Sources */,
 				A05AA073257F6DF60017A6B8 /* UIImage+WebP.m in Sources */,
 				A0CCCAAB257F1A590000E241 /* TOActivityCroppedImageProvider.m in Sources */,
 				A05AA07D257F6DF60017A6B8 /* SDImageCache.m in Sources */,
@@ -589,6 +608,7 @@
 				A05AA08D2580CCBB0017A6B8 /* SEPreviewPictureController.m in Sources */,
 				A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */,
 				A0CCCAB3257F1A7C0000E241 /* TOCroppedImageAttributes.m in Sources */,
+				90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,
 				A05AA076257F6DF60017A6B8 /* SDWebImageDecoder.m in Sources */,
 				A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */,

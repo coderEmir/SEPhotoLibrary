@@ -9,11 +9,17 @@
 #import "SEPreviewPictureController.h"
 #import "SEEditPictureViewController.h"
 
+#import "SEPreviewCell.h"
+#import "SEPreviewThumbCell.h"
+
 #import "SEImageToolView.h"
 #import "SEImageNavigationView.h"
 
 #define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
 #define SEScreenWidth self.view.bounds.size.width
+
+static NSString *const previewCell = @"SEPreviewCell";
+static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 
 @interface SEPreviewPictureController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -146,7 +152,7 @@
         collectionView.showsHorizontalScrollIndicator = NO;
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        
+        [collectionView registerClass:SEPreviewCell.class forCellWithReuseIdentifier:previewCell];
         if (@available(iOS 11.0, *)) {
             collectionView.contentInsetAdjustmentBehavior = NO;
         }
@@ -176,6 +182,8 @@
         
         collectionView.delegate = self;
         collectionView.dataSource = self;
+        
+        [collectionView registerClass:SEPreviewThumbCell.class forCellWithReuseIdentifier:previewThumbCell];
         
         [collectionView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(thumbCollectionViewHandleLongPressGesture:)]];
         
