@@ -7,7 +7,10 @@
 //
 
 #import "SEPreviewPictureController.h"
+#import "SEEditPictureViewController.h"
 
+#import "SEImageToolView.h"
+#import "SEImageNavigationView.h"
 @interface SEPreviewPictureController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic ,strong) NSMutableArray *highLightImages;
@@ -18,12 +21,22 @@
 
 @property (nonatomic ,strong) NSMutableArray *imageModels;
 
+@property (nonatomic, strong) SEImageToolView *imageToolView;
+@property (nonatomic, strong) SEImageNavigationView *imageNavigationView;
+
+@property (nonatomic, strong) NSMutableArray *selectedImageModels;
 @end
 
 @implementation SEPreviewPictureController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColor.blackColor;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:self.previewCollectionView];
+    // 添加顶部导航 imageNavigationView
+    
+    [self.view addSubview:self.imageToolView];
 
 }
 
@@ -43,7 +56,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [pictureCollection removeAllObjects];
             // TODO: 展示高清图片
-
+            [self.previewCollectionView reloadData];
+            [self.thumbCollectionView reloadData];
         });
     });
 }
@@ -53,13 +67,9 @@
     return nil;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 0;
-}
-
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 0;
+        
+    return collectionView == self.previewCollectionView ? self.highLightImages.count : self.selectedImageModels.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -174,5 +184,31 @@
     return _thumbCollectionView;
 }
 
-
+- (SEImageToolView *)imageToolView
+{
+    if (!_imageToolView) {
+        SEImageToolView *imageToolView = [[SEImageToolView alloc] initWithViewType:SEImageToolViewTypePreview callBackBlock:^(SEImageToolViewCallbackType type) {
+            
+            switch (type) {
+                case SEImageToolViewCallbackTypeEnterEdit:
+                {
+                    SEEditPictureViewController *controller = [[SEEditPictureViewController alloc] init];
+                    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                    [self presentViewController:controller animated:YES completion:nil];
+                }
+                    break;
+                case SEImageToolViewCallbackTypeConfirm:
+                {
+                    // 完成选择
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }];
+        _imageToolView = imageToolView;
+    }
+    return _imageToolView;
+}
 @end
