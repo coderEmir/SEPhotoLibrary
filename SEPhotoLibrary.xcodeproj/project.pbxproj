@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		90822A05257E7CC60071D762 /* SEEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A04257E7CC60071D762 /* SEEditPictureViewController.m */; };
 		90822A09257E87160071D762 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A07257E87160071D762 /* UIImage+Extension.m */; };
-		90822A492580F5430071D762 /* SEImageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A482580F5430071D762 /* SEImageToolView.m */; };
-		90822A4C25819D8F0071D762 /* SEImageNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A4B25819D8F0071D762 /* SEImageNavigationView.m */; };
+		90822A512581E7120071D762 /* SEImageNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A4D2581E7120071D762 /* SEImageNavigationView.m */; };
+		90822A522581E7120071D762 /* SEImageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A502581E7120071D762 /* SEImageToolView.m */; };
 		A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */; };
 		A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */; };
 		A05AA04E257F6AFD0017A6B8 /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA048257F6AFD0017A6B8 /* SDBrowserImageView.m */; };
@@ -64,10 +64,10 @@
 		90822A04257E7CC60071D762 /* SEEditPictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEEditPictureViewController.m; sourceTree = "<group>"; };
 		90822A07257E87160071D762 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		90822A08257E87160071D762 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
-		90822A472580F5430071D762 /* SEImageToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SEImageToolView.h; path = ../../../../../../../SEImageToolView.h; sourceTree = "<group>"; };
-		90822A482580F5430071D762 /* SEImageToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SEImageToolView.m; path = ../../../../../../../SEImageToolView.m; sourceTree = "<group>"; };
-		90822A4A25819D8F0071D762 /* SEImageNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SEImageNavigationView.h; path = ../../../../../../../SEImageNavigationView.h; sourceTree = "<group>"; };
-		90822A4B25819D8F0071D762 /* SEImageNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SEImageNavigationView.m; path = ../../../../../../../SEImageNavigationView.m; sourceTree = "<group>"; };
+		90822A4D2581E7120071D762 /* SEImageNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageNavigationView.m; sourceTree = "<group>"; };
+		90822A4E2581E7120071D762 /* SEImageNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageNavigationView.h; sourceTree = "<group>"; };
+		90822A4F2581E7120071D762 /* SEImageToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageToolView.h; sourceTree = "<group>"; };
+		90822A502581E7120071D762 /* SEImageToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageToolView.m; sourceTree = "<group>"; };
 		A05AA045257F6AFD0017A6B8 /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
 		A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
 		A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
@@ -205,10 +205,10 @@
 		90822A452580F5110071D762 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				90822A472580F5430071D762 /* SEImageToolView.h */,
-				90822A482580F5430071D762 /* SEImageToolView.m */,
-				90822A4A25819D8F0071D762 /* SEImageNavigationView.h */,
-				90822A4B25819D8F0071D762 /* SEImageNavigationView.m */,
+				90822A4E2581E7120071D762 /* SEImageNavigationView.h */,
+				90822A4D2581E7120071D762 /* SEImageNavigationView.m */,
+				90822A4F2581E7120071D762 /* SEImageToolView.h */,
+				90822A502581E7120071D762 /* SEImageToolView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -551,7 +551,6 @@
 			files = (
 				A05AA081257F6DF60017A6B8 /* UIView+WebCacheOperation.m in Sources */,
 				90822A09257E87160071D762 /* UIImage+Extension.m in Sources */,
-				90822A492580F5430071D762 /* SEImageToolView.m in Sources */,
 				A0C74416257DC9B800AB707B /* SEAlbumListView.m in Sources */,
 				A05AA075257F6DF60017A6B8 /* SDWebImageManager.m in Sources */,
 				A05AA07C257F6DF60017A6B8 /* SDWebImagePrefetcher.m in Sources */,
@@ -570,7 +569,9 @@
 				A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */,
 				A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */,
 				A05AA07A257F6DF60017A6B8 /* UIImage+MultiFormat.m in Sources */,
+				90822A512581E7120071D762 /* SEImageNavigationView.m in Sources */,
 				A0B3FD9F255ABB6B0072BCED /* ViewController.m in Sources */,
+				90822A522581E7120071D762 /* SEImageToolView.m in Sources */,
 				A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */,
 				A0CCCA9B257F1A0E0000E241 /* TOCropViewController.m in Sources */,
 				A0CCCAA7257F1A430000E241 /* TOCropViewControllerTransitioning.m in Sources */,
@@ -581,7 +582,6 @@
 				A05AA07E257F6DF60017A6B8 /* SDWebImageDownloaderOperation.m in Sources */,
 				A0B3FD99255ABB6B0072BCED /* AppDelegate.m in Sources */,
 				A0CCCAAF257F1A6D0000E241 /* UIImage+CropRotate.m in Sources */,
-				90822A4C25819D8F0071D762 /* SEImageNavigationView.m in Sources */,
 				A05AA07B257F6DF60017A6B8 /* SDWebImageCompat.m in Sources */,
 				A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */,
 				A05AA080257F6DF60017A6B8 /* UIImageView+WebCache.m in Sources */,

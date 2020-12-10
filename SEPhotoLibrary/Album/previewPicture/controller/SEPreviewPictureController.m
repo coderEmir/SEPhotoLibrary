@@ -11,6 +11,10 @@
 
 #import "SEImageToolView.h"
 #import "SEImageNavigationView.h"
+
+#define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
+#define SEScreenWidth self.view.bounds.size.width
+
 @interface SEPreviewPictureController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic ,strong) NSMutableArray *highLightImages;
@@ -211,4 +215,14 @@
     }
     return _imageToolView;
 }
+
+- (SEImageNavigationView *)imageNavigationView
+{
+    if (!_imageNavigationView)
+    {
+        _imageNavigationView = [[SEImageNavigationView alloc] initWithFrame:CGRectMake(0, 0, SEScreenWidth, SEStateBarH + 44)];
+    }
+    return _imageNavigationView;
+}
+
 @end
