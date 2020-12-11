@@ -238,6 +238,15 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		90822A60258266BC0071D762 /* albumManager */ = {
+			isa = PBXGroup;
+			children = (
+				A0A0BBCC255E68F8008597BB /* SEAlbumManager.h */,
+				A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */,
+			);
+			path = albumManager;
+			sourceTree = "<group>";
+		};
 		A05AA044257F6AFD0017A6B8 /* SDPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,7 +370,7 @@
 				A05AA050257F6DF60017A6B8 /* Vender */,
 				90822A06257E86FB0071D762 /* category */,
 				A0C74490257E2E8300AB707B /* assets */,
-				A0A0BBD9255E6A7A008597BB /* main */,
+				A0A0BBD9255E6A7A008597BB /* manager */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -391,7 +400,6 @@
 		A0A0BBCA255E68C6008597BB /* model */ = {
 			isa = PBXGroup;
 			children = (
-				A0A0BBCF255E6923008597BB /* PhotoManager */,
 				A0A0BBD3255E6A37008597BB /* SEAlbumModel.h */,
 				A0A0BBD4255E6A37008597BB /* SEAlbumModel.m */,
 				A0A0BBD6255E6A45008597BB /* SEPhotoModel.h */,
@@ -409,13 +417,13 @@
 			path = PhotoManager;
 			sourceTree = "<group>";
 		};
-		A0A0BBD9255E6A7A008597BB /* main */ = {
+		A0A0BBD9255E6A7A008597BB /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				A0A0BBCC255E68F8008597BB /* SEAlbumManager.h */,
-				A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */,
+				90822A60258266BC0071D762 /* albumManager */,
+				A0A0BBCF255E6923008597BB /* PhotoManager */,
 			);
-			path = main;
+			path = manager;
 			sourceTree = "<group>";
 		};
 		A0B3FD8B255ABB6B0072BCED = {

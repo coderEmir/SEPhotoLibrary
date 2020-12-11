@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class SEPhotoModel;
 @interface SEPreviewCell : UICollectionViewCell
+
+@property (nonatomic, strong) SEPhotoModel *model;
 
 @end
 

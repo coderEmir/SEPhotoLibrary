@@ -31,8 +31,6 @@ static CGFloat const pictureNumber = 3;
 + (instancetype)dequeueReusableCellWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath
 {
     SEAlbumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:albumCollectionViewCell forIndexPath:indexPath];
-    
-    cell.contentView.backgroundColor = UIColor.redColor;
     return cell;
 }
 

@@ -15,6 +15,8 @@
 #import "SEImageToolView.h"
 #import "SEImageNavigationView.h"
 
+#import "SEPhotoModel.h"
+
 #define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
 #define SEScreenWidth self.view.bounds.size.width
 
@@ -23,7 +25,7 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 
 @interface SEPreviewPictureController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic ,strong) NSMutableArray *highLightImages;
+@property (nonatomic ,strong) NSMutableArray *assetsModels;
 @property (nonatomic ,strong) UICollectionView *previewCollectionView;
 @property (nonatomic ,strong) UICollectionView *thumbCollectionView;
 
@@ -35,6 +37,8 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 @property (nonatomic, strong) SEImageNavigationView *imageNavigationView;
 
 @property (nonatomic, strong) NSMutableArray *selectedImageModels;
+
+@property (nonatomic, assign) CGPoint tmpThumbCenterOffset;
 @end
 
 @implementation SEPreviewPictureController
@@ -50,51 +54,75 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 
 }
 
-- (void)previewPicture:(UIImage *)image
+- (void)previewPicture:(SEPhotoModel *)imageModel
 {
-    [self.highLightImages addObject:image];
+    [self.assetsModels addObject:imageModel];
 }
 
-- (void)previewPictureCollection:(NSMutableArray <UIImage *>*)pictureCollection specifySubscript:(NSInteger)index
+- (void)previewPictureCollection:(NSMutableArray <PHAsset *>*)pictureCollection specifySubscript:(NSInteger)index
 {
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-       
-        for (UIImage * _Nonnull image in pictureCollection) {
-            [weakSelf.highLightImages addObject:image];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [pictureCollection removeAllObjects];
-            // TODO: 展示高清图片
-            [self.previewCollectionView reloadData];
-            [self.thumbCollectionView reloadData];
-        });
-    });
+    self.assetsModels = pictureCollection.mutableCopy;
+    [pictureCollection removeAllObjects];
+    
+    [self.previewCollectionView reloadData];
+    [self.thumbCollectionView reloadData];
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//
+//        for (PHAsset * _Nonnull asset in pictureCollection) {
+//            [weakSelf.highLightImages addObject:asset];
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [pictureCollection removeAllObjects];
+//            // TODO: 展示高清图片
+//            [self.previewCollectionView reloadData];
+//            [self.thumbCollectionView reloadData];
+//        });
+//    });
+}
+
+#pragma mark - UICollectionViewDelegate UICollectionViewDataSource
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+        
+    return collectionView == self.previewCollectionView ? self.imageModels.count : self.selectedImageModels.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (collectionView == self.previewCollectionView) {
+        SEPreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:previewCell forIndexPath:indexPath];
+        cell.model = self.assetsModels[indexPath.row];
+        return cell;
+    }
+    else
+    {
+        SEPreviewThumbCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:previewThumbCell forIndexPath:indexPath];
+        cell.model = self.assetsModels[indexPath.row];
+        return cell;
+    }
     return nil;
 }
 
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-        
-    return collectionView == self.previewCollectionView ? self.highLightImages.count : self.selectedImageModels.count;
-}
+
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (collectionView == self.thumbCollectionView) {
+        SEPreviewThumbCell *cell = (SEPreviewThumbCell *)[self.thumbCollectionView cellForItemAtIndexPath:indexPath];
+        cell.layer.borderColor = UIColor.clearColor.CGColor;
+        cell.layer.borderWidth = 0;
+        [self.thumbCollectionView reloadData];
+    }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    
-}
+//- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+//{
+//
+//}
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    return collectionView == self.thumbCollectionView;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -106,34 +134,47 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
         } else if (_currentIndex < 0) {
             _currentIndex = 0;
         }
-//        if (NSInteger selectedIndex = pickerController?.selectedImageModels.index(of: imageModels[currentIndex])) {
-//            imageNavigationView.selectBtn.setSelectedIndex(selectedIndex)
-//            let selectedIndexPath = IndexPath(item: selectedIndex, section: 0)
-//            thumbCollectionViewCellDidSelected(at: selectedIndexPath)
-//        } else {
-//            if thumbSelectedIndexPath != nil{
-//                collectionView(thumbCollectionView, didDeselectItemAt: thumbSelectedIndexPath!)
-//            }
-//            imageNavigationView.selectBtn.setSelectedIndex(-1)
-//        }
-//    }
     }
 }
 
 #pragma mark - event
 - (void)thumbCollectionViewHandleLongPressGesture:(UILongPressGestureRecognizer *)gesture
 {
-    
+    CGPoint locationCenter = [gesture locationInView:self.thumbCollectionView];
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSIndexPath *indexPath = [self.thumbCollectionView indexPathForItemAtPoint:locationCenter];
+            SEPreviewThumbCell *cell = (SEPreviewThumbCell *)[self.thumbCollectionView cellForItemAtIndexPath:indexPath];
+            self.tmpThumbCenterOffset = CGPointMake(cell.center.x - locationCenter.x, cell.center.y - locationCenter.y);
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            CGPoint targetPosition = CGPointApplyAffineTransform(locationCenter, CGAffineTransformMakeTranslation(self.tmpThumbCenterOffset.x, self.tmpThumbCenterOffset.y));
+            [self.thumbCollectionView updateInteractiveMovementTargetPosition:targetPosition];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            [self.thumbCollectionView endInteractiveMovement];
+            [self.thumbCollectionView cancelInteractiveMovement];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - lazyLoad
-- (NSMutableArray *)highLightImages
+- (NSMutableArray *)assetsModels
 {
-    if (!_highLightImages)
+    if (!_assetsModels)
     {
-        _highLightImages = [[NSMutableArray alloc] init];
+        _assetsModels = [[NSMutableArray alloc] init];
     }
-    return _highLightImages;
+    return _assetsModels;
 }
 
 - (UICollectionView *)previewCollectionView

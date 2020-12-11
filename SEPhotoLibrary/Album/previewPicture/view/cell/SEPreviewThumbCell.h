@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class SEPhotoModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SEPreviewThumbCell : UICollectionViewCell
+
+@property (nonatomic, strong) SEPhotoModel *model;
 
 @end
 

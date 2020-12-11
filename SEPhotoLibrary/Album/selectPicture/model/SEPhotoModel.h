@@ -17,6 +17,8 @@ typedef void(^PhotoActionBlock)(void);
 @property (nonatomic, strong) PHAsset *asset;
 /// 高清图
 @property (nonatomic, strong) UIImage *highDefinitionImage;
+/// 缩略图
+@property (nonatomic, strong) UIImage *thumbImage;
 /// 获取图片成功事件
 @property (nonatomic, copy) PhotoActionBlock photoActionBlock;
 
