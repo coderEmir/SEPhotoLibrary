@@ -28,13 +28,15 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imageView.frame = self.contentView.bounds;
+    self.imageView.frame = self.bounds;
 }
 
 - (UIImageView *)imageView
 {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] init];
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:_imageView];
     }
     return _imageView;
 }

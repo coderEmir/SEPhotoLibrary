@@ -85,10 +85,10 @@
     SEPhotoDefaultManager.choiceCountChangedBlock = ^(NSInteger choiceCount) {
         weakSelf.confirmButton.enabled = choiceCount != 0;
         if (choiceCount == 0) {
-            [weakSelf.confirmButton setTitle:@"预览" forState:UIControlStateNormal];
+            [weakSelf.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         } else {
-            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"预览%ld/%ld", (long)choiceCount, (long)SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
+            [weakSelf.confirmButton setTitle:[NSString stringWithFormat:@"确定%ld/%ld", (long)choiceCount, (long)SEPhotoDefaultManager.maxImageCount] forState:UIControlStateNormal];
             [weakSelf.confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     };
@@ -108,7 +108,7 @@
 {
     if (_albumModel.assets.count == 0) return;
     
-    CGFloat itemH = ScreenWidth / 3.f;
+    CGFloat itemH = SEScreenWidth / 3.f;
     NSInteger lastRow = _albumModel.assets.count % 3 == 0 ? 0 : 1;
     CGPoint bottomOffset = CGPointMake(0, (_albumModel.assets.count / 3 + lastRow) * itemH);
     [self.albumCollectionView setContentOffset:bottomOffset animated:NO];
@@ -213,28 +213,35 @@
         [self previewPictureWithSpecifySubscript:indexPath.row];
         return;
     }
+    SEPhotoModel *model = [[SEPhotoModel alloc] init];
+    model.asset = self.albumModel.assets[indexPath.row];
+    model.isSelectedPage = YES;
+    SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
+    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [controller previewPicture:model];
+    [self presentViewController:controller animated:YES completion:nil];
     // 单图预览
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.synchronous = YES;
-    options.resizeMode = PHImageRequestOptionsResizeModeNone;
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    options.networkAccessAllowed = YES;
-    PHAsset *asset = self.albumModel.assets[indexPath.row - 1];
-    
-    [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        UIImage * previewPicture = [UIImage imageWithData:imageData];
-        if (previewPicture)
-        {
-            SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
-            controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            
-            if (![self.albumModel.selectRows containsObject:@(indexPath.row)]) {
-                [controller previewPicture:previewPicture];
-            }
-            
-            [self presentViewController:controller animated:YES completion:nil];
-        }
-    }];
+//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//    options.synchronous = YES;
+//    options.resizeMode = PHImageRequestOptionsResizeModeNone;
+//    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+//    options.networkAccessAllowed = YES;
+//    PHAsset *asset = self.albumModel.assets[indexPath.row - 1];
+//
+//    [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+//        UIImage * previewPicture = [UIImage imageWithData:imageData];
+//        if (previewPicture)
+//        {
+//            SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
+//            controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//
+//            if (![self.albumModel.selectRows containsObject:@(indexPath.row)]) {
+//                [controller previewPicture:previewPicture];
+//            }
+//
+//            [self presentViewController:controller animated:YES completion:nil];
+//        }
+//    }];
 }
 
 - (void)saveImage:(UIImage *)UIImage
@@ -309,51 +316,77 @@
     [self previewPictureWithSpecifySubscript:0];
 }
 
+//if (SEPhotoDefaultManager.choiceCount == 0) return;
+//__block NSMutableArray<UIImage *> *photoList = NSMutableArray.array;
+//__block NSMutableDictionary *photoMdic = NSMutableDictionary.dictionary;
+//
+//NSInteger photoIndex = 0;
+//__block NSInteger rebackCount = 0;
+//__block NSInteger specifySubscript = 0;
+//
+//for (SEAlbumModel *albumModel in self.assetCollectionList) {
+//    for (NSNumber *row in albumModel.selectRows) {
+//         SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
+//
+//        __weak typeof(photoModel) weakPhotoModel = photoModel;
+//
+//        BOOL isSelectPhotoIndex = self.albumModel == albumModel && row.integerValue == index;
+//        photoMdic[@(photoIndex)] = [NSData data];
+//        photoModel.photoActionBlock = ^{
+//
+//            rebackCount ++;
+//
+//            photoMdic[@(weakPhotoModel.photoIndex)] = UIImagePNGRepresentation(weakPhotoModel.highDefinitionImage);
+//
+//            if (isSelectPhotoIndex) specifySubscript = photoIndex;
+//
+//            if (rebackCount == SEPhotoDefaultManager.choiceCount) {
+//                for (NSInteger index = 0; index < photoMdic.allKeys.count; index ++) {
+//                    [photoList addObject:[UIImage imageWithData:photoMdic[@(index)]]];
+//                }
+//                [photoMdic removeAllObjects];
+//                photoMdic = nil;
+//
+//                SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
+//                controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//
+//                [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
+//                [self presentViewController:controller animated:YES completion:nil];
+//            }
+//        };
+//        photoModel.asset = albumModel.assets[row.integerValue - 1];
+//        photoModel.photoIndex = photoIndex;
+//        photoIndex ++;
+//    }
+//}
+
 - (void)previewPictureWithSpecifySubscript:(NSInteger)index
 {
     if (SEPhotoDefaultManager.choiceCount == 0) return;
-    __block NSMutableArray<UIImage *> *photoList = NSMutableArray.array;
-    __block NSMutableDictionary *photoMdic = NSMutableDictionary.dictionary;
-    
-    NSInteger photoIndex = 0;
-    __block NSInteger rebackCount = 0;
+    __block NSMutableArray<SEPhotoModel *> *photoList = NSMutableArray.array;
     __block NSInteger specifySubscript = 0;
-    
-    for (SEAlbumModel *albumModel in self.assetCollectionList) {
-        for (NSNumber *row in albumModel.selectRows) {
-             SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
-
-            __weak typeof(photoModel) weakPhotoModel = photoModel;
-            
-            BOOL isSelectPhotoIndex = self.albumModel == albumModel && row.integerValue == index;
-            photoMdic[@(photoIndex)] = [NSData data];
-            photoModel.photoActionBlock = ^{
-                
-                rebackCount ++;
-                
-                photoMdic[@(weakPhotoModel.photoIndex)] = UIImagePNGRepresentation(weakPhotoModel.highDefinitionImage);
-                
-                if (isSelectPhotoIndex) specifySubscript = photoIndex;
-                
-                if (rebackCount == SEPhotoDefaultManager.choiceCount) {
-                    for (NSInteger index = 0; index < photoMdic.allKeys.count; index ++) {
-                        [photoList addObject:[UIImage imageWithData:photoMdic[@(index)]]];
-                    }
-                    [photoMdic removeAllObjects];
-                    photoMdic = nil;
-                    
-                    SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
-                    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-
-                    [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
-                    [self presentViewController:controller animated:YES completion:nil];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       
+        for (SEAlbumModel *albumModel in self.assetCollectionList) {
+            for (NSNumber *row in albumModel.selectRows) {
+                SEPhotoModel *photoModel = SEPhotoModel.alloc.init;
+                photoModel.isChecked = YES;
+                photoModel.asset = albumModel.assets[row.integerValue - 1];
+                [photoList addObject:photoModel];
+                if (self.albumModel == albumModel && row.integerValue == index) {
+                    photoModel.isSelectedPage = YES;
+                    specifySubscript = photoList.count - 1;
                 }
-            };
-            photoModel.asset = albumModel.assets[row.integerValue - 1];
-            photoModel.photoIndex = photoIndex;
-            photoIndex ++;
+            }
         }
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            SEPreviewPictureController *controller = [[SEPreviewPictureController alloc] init];
+            controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            [controller previewPictureCollection:photoList specifySubscript:specifySubscript];
+            [self presentViewController:controller animated:YES completion:nil];
+        });
+    });
 }
 
 - (void)showAlbum:(UIButton *)button
@@ -376,9 +409,9 @@
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         layout.minimumLineSpacing = 5.f;
         layout.minimumInteritemSpacing = 5.f;
-        layout.itemSize = CGSizeMake((ScreenWidth - 20.f) / 3.f, (ScreenWidth - 20.f) / 3.f);
+        layout.itemSize = CGSizeMake((SEScreenWidth - 20.f) / 3.f, (SEScreenWidth - 20.f) / 3.f);
         layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
-        _albumCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) collectionViewLayout:layout];
+        _albumCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SEScreenWidth, SEScreenHeight) collectionViewLayout:layout];
         _albumCollectionView.delegate = self;
         _albumCollectionView.dataSource = self;
         _albumCollectionView.backgroundColor = [UIColor whiteColor];
@@ -386,7 +419,6 @@
         _albumCollectionView.alwaysBounceVertical = YES;
         
         [_albumCollectionView registerClass:SEAlbumCollectionViewCell.class forCellWithReuseIdentifier:albumCollectionViewCell];
-        
         [self.view addSubview:_albumCollectionView];
     }
     

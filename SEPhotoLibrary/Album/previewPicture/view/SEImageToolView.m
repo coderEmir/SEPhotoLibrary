@@ -31,10 +31,14 @@
 
 - (instancetype)initWithViewType:(SEImageToolViewType)type callBackBlock:(nonnull CallBackBlock)callBackBlock
 {
-    self.type = type;
-    self.callBackBlock = callBackBlock;
-    [self setupUI];
-    return [self init];
+     self = [super init];
+    if (self)
+    {
+        self.type = type;
+        self.callBackBlock = callBackBlock;
+        [self setupUI];
+    }
+    return self;
 }
 
 - (void)setupUI
@@ -86,10 +90,10 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat height = UIApplication.sharedApplication.statusBarFrame.size.height > 20 ? 34 : 0;
+    CGFloat height = UIApplication.sharedApplication.statusBarFrame.size.height > 20 ? 34 : 34;
     height = height + 49.0;
     CGFloat contentViewW = self.bounds.size.width;
-    self.contentView.frame = CGRectMake(0, 0, contentViewW, height);
+    self.contentView.bounds = CGRectMake(0, 0, contentViewW, height);
     self.lineView.frame = CGRectMake(0, 0, self.bounds.size.width, 0.5);
     switch (self.type) {
         case SEImageToolViewTypePreview:
@@ -127,24 +131,11 @@
     return _contentView;
 }
 
-//- (UIButton *)previewBtn
-//{
-//    if (!_previewBtn) {
-//        UIButton *button = [[UIButton alloc] init];
-//        [button setTitle:@"预览" forState:UIControlStateNormal];
-//        [button setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
-//        button.titleLabel.font = [UIFont systemFontOfSize:15];
-//        button.enabled = false;
-//        _previewBtn = button;
-//    }
-//    return _previewBtn;
-//}
-
 - (UIButton *)editBtn
 {
     if (!_editBtn) {
         UIButton *button = [[UIButton alloc] init];
-        [button setTitle:@"编辑" forState:UIControlStateNormal];
+        [button setTitle:@"返回" forState:UIControlStateNormal];
         [button setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         _editBtn = button;

@@ -14,9 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)previewPicture:(SEPhotoModel *)imageModel;
 
-//- (void)previewPictureCollection:(NSMutableArray <UIImage *>*)pictureCollection specifySubscript:(NSInteger)index;
-
-- (void)previewPictureCollection:(NSMutableArray <SEPhotoModel *>*)pictureCollection specifySubscript:(NSInteger)index;
+- (void)previewPictureCollection:(NSMutableArray <SEPhotoModel *>*)pictureCollection specifySubscript:(NSInteger)specifySubscript;
 @end
 
 NS_ASSUME_NONNULL_END

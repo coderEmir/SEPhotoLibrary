@@ -51,8 +51,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.scrollView.frame = self.contentView.bounds;
-    self.imageView.frame = self.contentView.bounds;
+    self.scrollView.frame = self.bounds;
+    self.imageView.frame = self.bounds;
 }
 
 #pragma mark - UIScrollViewDelegate

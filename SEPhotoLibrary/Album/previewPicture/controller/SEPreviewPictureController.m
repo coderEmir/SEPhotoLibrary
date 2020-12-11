@@ -17,9 +17,12 @@
 
 #import "SEPhotoModel.h"
 
-#define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
-#define SEScreenWidth self.view.bounds.size.width
+#import "UIScrollView+Extension.h"
 
+#define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
+#define SEScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define SEScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define SEToolBarHeight SEStateBarH > 20 ? 34 : 0
 static NSString *const previewCell = @"SEPreviewCell";
 static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 
@@ -39,6 +42,9 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 @property (nonatomic, strong) NSMutableArray *selectedImageModels;
 
 @property (nonatomic, assign) CGPoint tmpThumbCenterOffset;
+
+@property (nonatomic ,assign) NSInteger specifySubscript;
+
 @end
 
 @implementation SEPreviewPictureController
@@ -47,55 +53,64 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.blackColor;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.view addSubview:self.previewCollectionView];
-    // 添加顶部导航 imageNavigationView
-    
-    [self.view addSubview:self.imageToolView];
+    [self setUp];
+}
 
+- (void)setUp
+{
+    [self.view addSubview:self.previewCollectionView];
+    [self.view addSubview:self.imageNavigationView];
+    [self.view addSubview:self.imageToolView];
 }
 
 - (void)previewPicture:(SEPhotoModel *)imageModel
 {
     [self.assetsModels addObject:imageModel];
+    [self.previewCollectionView reloadData];
 }
 
-- (void)previewPictureCollection:(NSMutableArray <PHAsset *>*)pictureCollection specifySubscript:(NSInteger)index
+- (void)previewPictureCollection:(NSMutableArray <SEPhotoModel *>*)pictureCollection specifySubscript:(NSInteger)specifySubscript
 {
+    self.specifySubscript = specifySubscript;
     self.assetsModels = pictureCollection.mutableCopy;
     [pictureCollection removeAllObjects];
+    pictureCollection = nil;
     
     [self.previewCollectionView reloadData];
-    [self.thumbCollectionView reloadData];
-//    __weak typeof(self) weakSelf = self;
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//
-//        for (PHAsset * _Nonnull asset in pictureCollection) {
-//            [weakSelf.highLightImages addObject:asset];
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [pictureCollection removeAllObjects];
-//            // TODO: 展示高清图片
-//            [self.previewCollectionView reloadData];
-//            [self.thumbCollectionView reloadData];
-//        });
-//    });
+    [self setNavigationView];
+    
+    if (self.assetsModels.count > 1) {
+        
+        [self.view addSubview:self.thumbCollectionView];
+        [self.thumbCollectionView reloadData];
+    }
+}
+
+- (void)setNavigationView
+{
+    self.imageNavigationView.totalImageCount = self.assetsModels.count;
+    [self.imageNavigationView currentImageIndex:self.specifySubscript selectState:YES];
+    [self.imageNavigationView rebackEventBlock:^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } imageSelectState:^(BOOL isSelected) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
         
-    return collectionView == self.previewCollectionView ? self.imageModels.count : self.selectedImageModels.count;
+    return self.assetsModels.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView == self.previewCollectionView) {
+    if ([collectionView.viewName containsString:previewCell]) {
         SEPreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:previewCell forIndexPath:indexPath];
         cell.model = self.assetsModels[indexPath.row];
         return cell;
     }
-    else
-    {
+    else if ([collectionView.viewName containsString:previewThumbCell]) {
         SEPreviewThumbCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:previewThumbCell forIndexPath:indexPath];
         cell.model = self.assetsModels[indexPath.row];
         return cell;
@@ -103,11 +118,9 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
     return nil;
 }
 
-
-
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView == self.thumbCollectionView) {
+    if ([collectionView.viewName containsString:previewThumbCell]) {
         SEPreviewThumbCell *cell = (SEPreviewThumbCell *)[self.thumbCollectionView cellForItemAtIndexPath:indexPath];
         cell.layer.borderColor = UIColor.clearColor.CGColor;
         cell.layer.borderWidth = 0;
@@ -129,9 +142,12 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 {
     if (scrollView == self.previewCollectionView) {
         _currentIndex = (NSInteger)round(scrollView.contentOffset.x / scrollView.bounds.size.width);
-        if (_currentIndex >= self.imageModels.count) {
+        if (_currentIndex >= self.imageModels.count)
+        {
             _currentIndex = self.imageModels.count - 1;
-        } else if (_currentIndex < 0) {
+        }
+        else if (_currentIndex < 0)
+        {
             _currentIndex = 0;
         }
     }
@@ -147,22 +163,21 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
             NSIndexPath *indexPath = [self.thumbCollectionView indexPathForItemAtPoint:locationCenter];
             SEPreviewThumbCell *cell = (SEPreviewThumbCell *)[self.thumbCollectionView cellForItemAtIndexPath:indexPath];
             self.tmpThumbCenterOffset = CGPointMake(cell.center.x - locationCenter.x, cell.center.y - locationCenter.y);
+            [self.thumbCollectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
         }
             break;
         case UIGestureRecognizerStateChanged:
         {
-            CGPoint targetPosition = CGPointApplyAffineTransform(locationCenter, CGAffineTransformMakeTranslation(self.tmpThumbCenterOffset.x, self.tmpThumbCenterOffset.y));
-            [self.thumbCollectionView updateInteractiveMovementTargetPosition:targetPosition];
+//            CGPoint targetPosition = CGPointApplyAffineTransform(locationCenter, CGAffineTransformMakeTranslation(self.tmpThumbCenterOffset.x, self.tmpThumbCenterOffset.y));
+//            [self.thumbCollectionView updateInteractiveMovementTargetPosition:targetPosition];
         }
             break;
         case UIGestureRecognizerStateEnded:
-        {
             [self.thumbCollectionView endInteractiveMovement];
-            [self.thumbCollectionView cancelInteractiveMovement];
-        }
             break;
             
         default:
+            [self.thumbCollectionView cancelInteractiveMovement];
             break;
     }
 }
@@ -186,6 +201,8 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
         layout.minimumLineSpacing = 2 * cellSpacing;
         layout.minimumInteritemSpacing = 0;
         layout.sectionInset = UIEdgeInsetsMake(0, cellSpacing, 0, cellSpacing);
+        layout.itemSize = self.view.bounds.size;
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         collectionView.backgroundColor = UIColor.clearColor;
         collectionView.pagingEnabled = YES;
@@ -193,11 +210,13 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
         collectionView.showsHorizontalScrollIndicator = NO;
         collectionView.delegate = self;
         collectionView.dataSource = self;
+        collectionView.viewName = previewCell;
         [collectionView registerClass:SEPreviewCell.class forCellWithReuseIdentifier:previewCell];
         if (@available(iOS 11.0, *)) {
             collectionView.contentInsetAdjustmentBehavior = NO;
         }
         collectionView.frame = CGRectInset(collectionView.frame, -cellSpacing, 0);
+        
         _previewCollectionView = collectionView;
     }
     return _previewCollectionView;
@@ -213,8 +232,9 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
         layout.minimumInteritemSpacing = 10;
         layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         layout.itemSize = CGSizeMake(70, 70);
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         // toolBarHeight
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 90, self.view.bounds.size.width, 90) collectionViewLayout:layout];
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SEScreenHeight - 90, SEScreenWidth, 90) collectionViewLayout:layout];
         collectionView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.97];
         collectionView.pagingEnabled = YES;
         collectionView.showsVerticalScrollIndicator = NO;
@@ -223,7 +243,7 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
         
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        
+        collectionView.viewName = previewThumbCell;
         [collectionView registerClass:SEPreviewThumbCell.class forCellWithReuseIdentifier:previewThumbCell];
         
         [collectionView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(thumbCollectionViewHandleLongPressGesture:)]];
@@ -253,6 +273,7 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
                 case SEImageToolViewCallbackTypeConfirm:
                 {
                     // 完成选择
+                    [self dismissViewControllerAnimated:YES completion:nil];
                 }
                     break;
                     
@@ -260,6 +281,7 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
                     break;
             }
         }];
+        imageToolView.frame = CGRectMake(0, SEScreenHeight - SEToolBarHeight, SEScreenWidth, SEToolBarHeight + 49);
         _imageToolView = imageToolView;
     }
     return _imageToolView;

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-#define ScreenWidth  [[UIScreen mainScreen] bounds].size.width
-#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
-
 static NSString * _Nullable const albumCollectionViewCell = @"albumCollectionViewCell";
+
+#define SEScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define SEScreenHeight [[UIScreen mainScreen] bounds].size.height
 
 NS_ASSUME_NONNULL_BEGIN
 

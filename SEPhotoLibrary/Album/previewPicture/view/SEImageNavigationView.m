@@ -8,6 +8,10 @@
 
 #import "SEImageNavigationView.h"
 #define SEStateBarH [UIApplication sharedApplication].statusBarFrame.size.height
+
+typedef void(^CancleBlock)(void);
+typedef void(^SelectBlock)(BOOL isSelected);
+
 @interface SEImageNavigationView ()
 
 @property (nonatomic ,strong) UIButton *selectBtn;
@@ -16,6 +20,9 @@
 
 @property (nonatomic ,strong) UILabel *titleLable;
 
+@property (nonatomic ,copy) CancleBlock cancleBlock;
+
+@property (nonatomic ,copy) SelectBlock selectBlock;
 @end
 
 
@@ -31,10 +38,10 @@
     return self;
 }
 
-- (void)currentImageIndex:(NSString *)imageIndex selectState:(BOOL)isSelect
+- (void)currentImageIndex:(NSInteger)imageIndex selectState:(BOOL)isSelect
 {
-    self.titleLable.text = imageIndex;
-    self.selectBtn.selected =isSelect;
+    self.titleLable.text = [NSString stringWithFormat:@"%zd/%zd",imageIndex,self.totalImageCount];
+    self.selectBtn.selected = isSelect;
 }
 
 - (void)setUpUI
@@ -42,6 +49,12 @@
     [self addSubview:self.backBtn];
     [self addSubview:self.titleLable];
     [self addSubview:self.selectBtn];
+}
+
+- (void)rebackEventBlock:(void(^)(void))cancleBlock imageSelectState:(void(^)(BOOL isSelected))selectblock
+{
+    self.cancleBlock = cancleBlock;
+    self.selectBlock = selectblock;
 }
 
 - (void)layoutViews
@@ -55,12 +68,24 @@
     self.titleLable.frame = CGRectMake((viewWidth - 100) * 0.5, subButtonY, 100, subButtonWH);
 }
 
+-  (void)backEvent
+{
+    if (self.cancleBlock) self.cancleBlock();
+}
+
+- (void)clickEvent
+{
+    if(self.selectBlock) self.selectBlock(self.selectBtn.selected);
+}
+
+#pragma mark - lazyLoad
 - (UIButton *)backBtn
 {
     if (!_backBtn)
     {
         UIButton *button = [[UIButton alloc] init];
         button.backgroundColor = UIColor.blueColor;
+        [button addTarget:self action:@selector(backEvent) forControlEvents:UIControlEventTouchUpInside];
         _backBtn = button;
     }
     return _backBtn;
@@ -72,6 +97,7 @@
     {
         UIButton *button = [[UIButton alloc] init];
         button.backgroundColor = UIColor.magentaColor;
+        [button addTarget:self action:@selector(clickEvent) forControlEvents:UIControlEventTouchUpInside];
         _selectBtn = button;
     }
     return _selectBtn;

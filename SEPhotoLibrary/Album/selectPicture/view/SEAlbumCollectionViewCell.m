@@ -64,7 +64,7 @@ static CGFloat const pictureNumber = 3;
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self setupCell];
 //    self.photoImageView.image = nil;
-    CGFloat imageWidth = (ScreenWidth - 20.f) / 5.5;
+    CGFloat imageWidth = (SEScreenWidth - 20.f) / 5.5;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     // 同步获得图片, 只会返回1张图片
     options.synchronous = NO;
@@ -82,7 +82,7 @@ static CGFloat const pictureNumber = 3;
 {
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-    CGFloat paddingWidth = (ScreenWidth - 20.f) / 3;
+    CGFloat paddingWidth = (SEScreenWidth - 20.f) / 3;
     self.cameraImgV.frame = CGRectMake((paddingWidth - 27.5) * 0.5, 24, 27.5, 22);
     self.cameraTitle.frame = CGRectMake(0, CGRectGetMaxY(self.cameraImgV.frame) + 7, paddingWidth, 15);
     [self.contentView addSubview:_cameraImgV];
@@ -103,7 +103,7 @@ static CGFloat const pictureNumber = 3;
         [_selectButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_selectButton addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
         
-        _selectButton.frame = CGRectMake((ScreenWidth - 20.f) / pictureNumber - 29, 3, 25, 25);
+        _selectButton.frame = CGRectMake((SEScreenWidth - 20.f) / pictureNumber - 29, 3, 25, 25);
     }
     
     return _selectButton;
@@ -111,7 +111,7 @@ static CGFloat const pictureNumber = 3;
 
 -(UIView *)translucentView {
     if (!_translucentView) {
-        _translucentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 20.f) / pictureNumber, (ScreenWidth - 20.f) / pictureNumber)];
+        _translucentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (SEScreenWidth - 20.f) / pictureNumber, (SEScreenWidth - 20.f) / pictureNumber)];
         _translucentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
         
         _translucentView.hidden = YES;
@@ -122,7 +122,7 @@ static CGFloat const pictureNumber = 3;
 
 -(UIImageView *)photoImageView {
     if (!_photoImageView) {
-        _photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 20.f) / pictureNumber, (ScreenWidth - 20.f) / pictureNumber)];
+        _photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SEScreenWidth - 20.f) / pictureNumber, (SEScreenWidth - 20.f) / pictureNumber)];
         _photoImageView.contentMode = UIViewContentModeScaleAspectFill;
         _photoImageView.layer.masksToBounds = YES;
         

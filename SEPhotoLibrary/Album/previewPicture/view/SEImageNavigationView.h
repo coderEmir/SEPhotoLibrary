@@ -11,7 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SEImageNavigationView : UIView
-- (void)currentImageIndex:(NSString *)imageIndex selectState:(BOOL)isSelect;
+
+@property (nonatomic ,assign) NSInteger totalImageCount;
+
+- (void)currentImageIndex:(NSInteger)imageIndex selectState:(BOOL)isSelect;
+
+- (void)rebackEventBlock:(void(^)(void))block imageSelectState:(void(^)(BOOL isSelected))block;
 
 @end
 
