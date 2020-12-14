@@ -9,6 +9,7 @@
 #import "SEPreviewThumbCell.h"
 #import "SEPhotoModel.h"
 #import "SEPhotoManager.h"
+#import "SEPhotoLibrary-Swift.h"
 @interface SEPreviewThumbCell ()
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -23,19 +24,21 @@
     self.imageView.layer.borderColor = _model.isSelectedPage ? UIColor.redColor.CGColor : UIColor.clearColor.CGColor;
     
     self.imageView.image = nil;
-    if (self.model.editedImage) {
-        self.imageView.image = self.model.editedImage;
-        return;
-    }
     
     if (model.thumbImage) {
          self.imageView.image = model.thumbImage;
         return;
     }
-    [SEPhotoDefaultManager requestThumbImage:model.asset callBackImage:^(UIImage * _Nonnull image) {
+    
+    [HXPhotoImageManager requestThumbImageFor:self.model.asset completion:^(UIImage * _Nullable image, BOOL isFinished) {
+        if (!isFinished) return;
         model.thumbImage = image;
         self.imageView.image = image;
     }];
+//    [SEPhotoDefaultManager requestThumbImage:model.asset callBackImage:^(UIImage * _Nonnull image) {
+//        model.thumbImage = image;
+//        self.imageView.image = image;
+//    }];
     
 }
 

@@ -181,7 +181,7 @@ extension HXImageClipScrollView {
             scale:originImage.scale,
             orientation:UIImage.Orientation(rawValue: flipImageOrientation)!
         )
-        scrollView.zoomScale = 0
+        scrollView.zoomScale = 1
         imageView.image = flipImage
         setupSubviewsLayout()
         setupClipResizeView()

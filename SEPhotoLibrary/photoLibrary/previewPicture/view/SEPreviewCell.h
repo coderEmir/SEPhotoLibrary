@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SEPhotoLibrary-Swift.h"
 @protocol SEPhotoModelDelegate <NSObject>
 @optional;
 - (void)photoModelSingleTapEvent;

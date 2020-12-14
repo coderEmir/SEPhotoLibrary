@@ -78,9 +78,10 @@ class HXImageClipViewController: UIViewController {
             addClipScrollViewWithImage(editedImage, contentInset: contentInset)
         } else {
             activityView.startAnimating()
-            SEPhotoManager.default().requestPreviewImage(imageModel.asset) { (image: UIImage) in
+            
+            HXPhotoImageManager.requestPreviewImage(for:imageModel.asset) {(image, finished) in
                 self.activityView.stopAnimating()
-                self.addClipScrollViewWithImage(image, contentInset: contentInset)
+                self.addClipScrollViewWithImage(image!, contentInset: contentInset)
             }
         }
     }

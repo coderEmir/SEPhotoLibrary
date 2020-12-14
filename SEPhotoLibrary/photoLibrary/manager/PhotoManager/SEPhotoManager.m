@@ -56,6 +56,7 @@
             [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                 UIImage *image = [UIImage imageWithData:imageData];
                 if (callBackImageBlock) callBackImageBlock(image);
+                image = nil;
             }];
     }
     

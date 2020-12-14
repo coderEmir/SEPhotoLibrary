@@ -3,5 +3,4 @@
 //
 
 #import "SEImageToolView.h"
-#import "SEPhotoManager.h"
 #import "SEPhotoModel.h"

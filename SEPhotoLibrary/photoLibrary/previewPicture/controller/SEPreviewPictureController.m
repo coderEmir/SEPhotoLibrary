@@ -7,8 +7,6 @@
 //
 
 #import "SEPreviewPictureController.h"
-
-#import "SEPhotoLibrary-Swift.h"
 #import "SEPreviewCell.h"
 #import "SEPreviewThumbCell.h"
 
@@ -61,6 +59,8 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
 - (void)dealloc
 {
     [self.assetsModels removeAllObjects];
+    self.previewCollectionView = nil;
+    self.thumbCollectionView= nil;
 }
 
 - (void)setUp

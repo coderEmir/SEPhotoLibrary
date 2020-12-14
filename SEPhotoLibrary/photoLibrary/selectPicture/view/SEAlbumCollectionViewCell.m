@@ -63,7 +63,7 @@ static CGFloat const pictureNumber = 3;
     
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self setupCell];
-//    self.photoImageView.image = nil;
+    
     CGFloat imageWidth = (SEScreenWidth - 20.f) / 5.5;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     CGFloat imageWH = imageWidth * UIScreen.mainScreen.scale;
@@ -124,10 +124,10 @@ static CGFloat const pictureNumber = 3;
 
 -(UIImageView *)photoImageView {
     if (!_photoImageView) {
-        _photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SEScreenWidth - 20.f) / pictureNumber, (SEScreenWidth - 20.f) / pictureNumber)];
-        _photoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _photoImageView.layer.masksToBounds = YES;
-        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SEScreenWidth - 20.f) / pictureNumber, (SEScreenWidth - 20.f) / pictureNumber)];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.layer.masksToBounds = YES;
+        _photoImageView = imageView;
     }
     [self.contentView addSubview:_photoImageView];
     return _photoImageView;

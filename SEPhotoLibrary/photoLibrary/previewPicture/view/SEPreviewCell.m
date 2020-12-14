@@ -10,7 +10,6 @@
 
 #import "SEPhotoModel.h"
 
-#import "SEPhotoManager.h"
 @interface SEPreviewCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -42,18 +41,24 @@
 
 - (void)loadImage
 {
-    self.imageView.image = nil;
+
     if (self.model.editedImage) {
         self.imageView.image = self.model.editedImage;
         return;
     }
     self.imageView.image = self.model.thumbImage;
-    [SEPhotoDefaultManager requestPreviewImage:self.model.asset callBackImage:^(UIImage * _Nullable image) {
-        
+    
+    [HXPhotoImageManager requestPreviewImageFor:self.model.asset completion:^(UIImage * _Nullable image, BOOL isFinished) {
+        if (!isFinished) return;
         self.imageView.image = image;
         self.imageView.frame = [self calculateContainerFrame:self.imageView.image];
-        [self resizeImageView];
     }];
+//    [SEPhotoDefaultManager requestPreviewImage:self.model.asset callBackImage:^(UIImage * _Nullable image) {
+//
+//        self.imageView.image = image;
+//        self.imageView.frame = [self calculateContainerFrame:self.imageView.image];
+//        [self resizeImageView];
+//    }];
 }
 
 - (void)resizeImageView
@@ -109,7 +114,7 @@
 - (void)doubleTap:(UIGestureRecognizer *)doubleTap
 {
     if (self.scrollView.zoomScale > 1.0) {
-        self.scrollView.zoomScale = 1;
+        [self.scrollView setZoomScale:1 animated:YES];
     }
     else
     {

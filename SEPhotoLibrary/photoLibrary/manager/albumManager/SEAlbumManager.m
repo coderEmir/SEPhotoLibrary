@@ -12,7 +12,7 @@
 #import <Photos/Photos.h>
 @implementation SEAlbumManager
 
-+ (void)showPhotoManager:(UIViewController *)superController withMaxImageCount:(NSInteger)maxImageCount showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop andAlbumArrayBlock:(void(^)(NSMutableArray <UIImage *> *photoModel))albumArrayBlock
++ (void)showPhotoManager:(UIViewController *)superController withMaxImageCount:(NSInteger)maxImageCount showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop andAlbumArrayBlock:(void(^)(NSArray <UIImage *> *photoModel))albumArrayBlock
 {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -31,13 +31,12 @@
     }];
 }
 
-+ (void)showViewControllerWithAlbumArrayBlock:(void(^)(NSMutableArray <UIImage *> *photoModel))albumArrayBlock inController:(UIViewController *)superController showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop
++ (void)showViewControllerWithAlbumArrayBlock:(void(^)(NSArray <UIImage *> *photoModel))albumArrayBlock inController:(UIViewController *)superController showCamera:(BOOL)isShowCamera showFilter:(BOOL)isShowFilter pictureScrollsFromTheTop:(BOOL)isScrollTop
 {
     SEAlbumViewController *controller = [[SEAlbumViewController alloc] init];
     [controller showCamera:isShowCamera showFilter:isShowFilter pictureScrollsFromTheTop:isScrollTop];
     controller.confirmActionBlock = ^{
         albumArrayBlock(SEPhotoDefaultManager.photoModelList);
-        SEPhotoDefaultManager.photoModelList = nil;
     };
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     navController.modalPresentationStyle = UIModalPresentationOverFullScreen;
