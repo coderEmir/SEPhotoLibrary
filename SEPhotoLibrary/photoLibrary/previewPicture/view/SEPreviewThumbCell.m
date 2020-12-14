@@ -21,6 +21,13 @@
     _model = model;
     self.imageView.layer.borderWidth = _model.isSelectedPage ? 1 : 0;
     self.imageView.layer.borderColor = _model.isSelectedPage ? UIColor.redColor.CGColor : UIColor.clearColor.CGColor;
+    
+    self.imageView.image = nil;
+    if (self.model.editedImage) {
+        self.imageView.image = self.model.editedImage;
+        return;
+    }
+    
     if (model.thumbImage) {
          self.imageView.image = model.thumbImage;
         return;

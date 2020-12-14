@@ -262,11 +262,13 @@ static NSString *const previewThumbCell = @"SEPreviewThumbCell";
             switch (type) {
                 case SEImageToolViewCallbackTypeEnterEdit:
                 {
-                    SEPhotoModel *model = self.assetsModels[self.specifySubscript];
+                    __block SEPhotoModel *specifySubscriptModel = self.assetsModels[self.specifySubscript];
                     HXImageClipViewController *controller = [[HXImageClipViewController alloc] init];
                     controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                    [controller editImageWithModel:model clipImageCallback:^(SEPhotoModel * _Nonnull model) {
-                        
+                    [controller editImageWithModel:specifySubscriptModel clipImageCallback:^(SEPhotoModel * _Nonnull model) {
+                        specifySubscriptModel = model;
+                        [self.thumbCollectionView reloadData];
+                        [self.previewCollectionView reloadData];
                     }];
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self presentViewController:controller animated:YES completion:nil];

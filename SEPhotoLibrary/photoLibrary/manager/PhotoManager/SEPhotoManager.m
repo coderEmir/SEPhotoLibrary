@@ -127,13 +127,19 @@
         dispatch_group_enter(group);
         
         [images addObject:UIImage.new];
-        
-        [SEPhotoDefaultManager requestPreviewImage:model.asset callBackImage:^(UIImage * _Nullable image) {
-            if (image != nil) {
-                [images replaceObjectAtIndex:selectImageIndex withObject:image];
-            }
-            dispatch_group_leave(group);
-        }];
+        if (model.editedImage)
+        {
+            [images replaceObjectAtIndex:selectImageIndex withObject:model.editedImage];
+        }
+        else
+        {
+            [SEPhotoDefaultManager requestPreviewImage:model.asset callBackImage:^(UIImage * _Nullable image) {
+                if (image != nil) {
+                    [images replaceObjectAtIndex:selectImageIndex withObject:image];
+                }
+                dispatch_group_leave(group);
+            }];
+        }
         selectImageIndex ++;
     }
 

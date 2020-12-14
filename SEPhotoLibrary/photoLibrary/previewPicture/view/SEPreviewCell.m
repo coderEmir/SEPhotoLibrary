@@ -42,8 +42,12 @@
 
 - (void)loadImage
 {
+    self.imageView.image = nil;
+    if (self.model.editedImage) {
+        self.imageView.image = self.model.editedImage;
+        return;
+    }
     self.imageView.image = self.model.thumbImage;
-
     [SEPhotoDefaultManager requestPreviewImage:self.model.asset callBackImage:^(UIImage * _Nullable image) {
         
         self.imageView.image = image;
