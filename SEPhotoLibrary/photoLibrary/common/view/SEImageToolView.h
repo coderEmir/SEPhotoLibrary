@@ -17,7 +17,9 @@ typedef enum : NSUInteger {
     SEImageToolViewCallbackTypeConfirm,
     SEImageToolViewCallbackTypeEnterEdit,
     SEImageToolViewCallbackTypeCancleEdit,
-    SEImageToolViewCallbackTypeFinishEdit
+    SEImageToolViewCallbackTypeFinishEdit,
+    SEImageToolViewCallbackTypeReback,
+    SEImageToolViewCallbackTypeRotate
 } SEImageToolViewCallbackType;
 
 typedef void(^CallBackBlock)(SEImageToolViewCallbackType);
@@ -25,6 +27,10 @@ typedef void(^CallBackBlock)(SEImageToolViewCallbackType);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SEImageToolView : UIView
+
+@property (nonatomic ,strong, readonly) UIButton *rebackBtn;
+@property (nonatomic, strong, readonly) UIButton *confirmBtn;
+@property (nonatomic, strong, readonly) UIButton *cancelBtn;
 
 - (instancetype)initWithViewType:(SEImageToolViewType)type callBackBlock:(CallBackBlock)callBackBlock;
 

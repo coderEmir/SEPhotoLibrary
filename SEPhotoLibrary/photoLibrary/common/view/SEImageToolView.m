@@ -26,6 +26,11 @@
 @property (nonatomic , assign) SEImageToolViewType type;
 
 @property (nonatomic , copy) CallBackBlock callBackBlock;
+
+@property (nonatomic ,strong) UIButton *rotateBtn;
+
+@property (nonatomic ,strong) UIButton *rebackBtn;
+
 @end
 
 @implementation SEImageToolView
@@ -61,8 +66,12 @@
         {
             [self.contentView addSubview:self.cancelBtn];
             [self.contentView addSubview:self.confirmBtn];
+            [self.contentView addSubview:self.rebackBtn];
+            [self.contentView addSubview:self.rotateBtn];
             [self.cancelBtn addTarget:self action:@selector(cancleEdit) forControlEvents:UIControlEventTouchUpInside];
             [self.confirmBtn addTarget:self action:@selector(finishEdit) forControlEvents:UIControlEventTouchUpInside];
+            [self.rebackBtn addTarget:self action:@selector(rebackEdit) forControlEvents:UIControlEventTouchUpInside];
+            [self.rotateBtn addTarget:self action:@selector(rotateEdit) forControlEvents:UIControlEventTouchUpInside];
         }
             break;
     }
@@ -88,6 +97,16 @@
     if (self.callBackBlock) self.callBackBlock(SEImageToolViewCallbackTypeFinishEdit);
 }
 
+- (void)rebackEdit
+{
+    if (self.callBackBlock) self.callBackBlock(SEImageToolViewCallbackTypeReback);
+}
+
+- (void)rotateEdit
+{
+    if (self.callBackBlock) self.callBackBlock(SEImageToolViewCallbackTypeRotate);
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -99,15 +118,19 @@
         case SEImageToolViewTypePreview:
         {
             self.editBtn.frame = CGRectMake(0, (height - 44) * 0.5, 70, 44);
-            self.confirmBtn.frame = CGRectMake(contentViewW - 70, (height - 28) * 0.5, 60, 28);
+            self.confirmBtn.frame = CGRectMake(contentViewW - 70, (height - 28) * 0.5, 70, 28);
             [self.confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         }
             break;
             
         case SEImageToolViewTypeClip:
         {
-            self.cancelBtn.frame = CGRectMake(0, (height - 44) * 0.5, 70, 44);
-            self.confirmBtn.frame = CGRectMake(contentViewW - 70, (height - 28) * 0.5, 60, 28);
+            CGFloat functionBtnW = (contentViewW - 170) * 0.5;
+            CGFloat subBtnH = 44;
+            self.cancelBtn.frame = CGRectMake(0, (height - subBtnH) * 0.5, 70, subBtnH);
+            self.confirmBtn.frame = CGRectMake(contentViewW - 70, self.cancelBtn.frame.origin.y, 70, subBtnH);
+            self.rotateBtn.frame = CGRectMake(85, self.cancelBtn.frame.origin.y, functionBtnW, subBtnH);
+            self.rebackBtn.frame = CGRectMake(90 + functionBtnW, self.cancelBtn.frame.origin.y, functionBtnW, subBtnH);
         }
             break;
     }
@@ -168,5 +191,30 @@
     return _cancelBtn;
 }
 
+- (UIButton *)rotateBtn
+{
+    if (!_rotateBtn)
+    {
+        UIButton *button = [[UIButton alloc] init];
+        [button setTitle:@"旋转" forState:UIControlStateNormal];
+        [button setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        _rotateBtn = button;
+    }
+    return _rotateBtn;
+}
+
+- (UIButton *)rebackBtn
+{
+    if (!_rebackBtn)
+    {
+        UIButton *button = [[UIButton alloc] init];
+        [button setTitle:@"还原" forState:UIControlStateNormal];
+        [button setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        _rebackBtn = button;
+    }
+    return _rebackBtn;
+}
 
 @end

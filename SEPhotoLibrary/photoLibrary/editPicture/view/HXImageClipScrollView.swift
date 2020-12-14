@@ -105,6 +105,7 @@ extension HXImageClipScrollView {
     }
     
     private func setupClipResizeView() {
+        self.clipResizeView?.removeFromSuperview()
         let clipResizeView = HXImageClipResizeView(frame: scrollView.frame, contentSize: contentSize, margin: margin, scrollView: scrollView, imageView: imageView)
         clipResizeView.canRecoveryClosure = canRecoveryClosure
         clipResizeView.prepareToScaleClosure = prepareToScaleClosure
@@ -169,6 +170,23 @@ extension HXImageClipScrollView: UIScrollViewDelegate {
 
 // MARK: -  Public Methods
 extension HXImageClipScrollView {
+    
+    func rotate(orientation: UIImage.Orientation) {
+
+        guard let originImage = imageView.image else { return }
+        
+        let flipImageOrientation = (originImage.imageOrientation.rawValue + 1) % 8
+        
+        let flipImage =  UIImage(cgImage:originImage.cgImage!,
+            scale:originImage.scale,
+            orientation:UIImage.Orientation(rawValue: flipImageOrientation)!
+        )
+        scrollView.zoomScale = 0
+        imageView.image = flipImage
+        setupSubviewsLayout()
+        setupClipResizeView()
+        clipResizeView?.setUpFrame(frame: scrollView.frame, contentSize: contentSize, margin: margin, scrollView: scrollView, imageView: imageView)
+    }
     
     func recovery() {
         guard let clipResizeView = clipResizeView else { return }

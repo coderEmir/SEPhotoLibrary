@@ -137,9 +137,15 @@ class HXImageClipResizeView: UIView {
         self.margin = margin
         self.scrollView = scrollView
         self.imageView = imageView
-        calculateResizeFrames()
         addSublayers()
         addGestures()
+        setUpFrame(frame: frame, contentSize: contentSize, margin: margin, scrollView: scrollView, imageView: imageView)
+    }
+    
+    func setUpFrame (frame: CGRect, contentSize: CGSize, margin: CGFloat, scrollView: UIScrollView, imageView: UIImageView) {
+        
+        calculateResizeFrames()
+        
         updateResizeFrame(originFrame, animated: false)
     }
     

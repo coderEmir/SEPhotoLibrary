@@ -28,23 +28,19 @@ class HXImageClipViewController: UIViewController {
         let imageToolView = SEImageToolView(viewType: SEImageToolViewTypeClip) { (type) in
             switch (type) {
                 case SEImageToolViewCallbackTypeCancleEdit:
-                    do {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                    break;
+                    self.cancelBtnClicked()
                 case SEImageToolViewCallbackTypeFinishEdit:
-                    do {
-                        
-                    }
-                    break;
-                    
-                default:
-                    break;
+                    self.completeBtnClicked()
+                case SEImageToolViewCallbackTypeReback:
+                    self.restoreBtnClicked()
+                case SEImageToolViewCallbackTypeRotate:
+                    self.rotateBtnClicked()
+                default:do {}
             }
             
         }
         imageToolView.backgroundColor = UIColor.black
-        imageToolView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 49 - toolBarHeight, width: UIScreen.main.bounds.width, height: 49 + toolBarHeight)
+        imageToolView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - toolBarHeight, width: UIScreen.main.bounds.width, height: toolBarHeight)
         return imageToolView
     }()
     
@@ -59,6 +55,8 @@ class HXImageClipViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    private var orientation : UIImage.Orientation = UIImage.Orientation.up
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,13 +88,13 @@ class HXImageClipViewController: UIViewController {
     private func addClipScrollViewWithImage(_ image: UIImage, contentInset: UIEdgeInsets) {
         let clipScrollView = HXImageClipScrollView(frame: view.bounds, image: image, margin: 30, contentInset: contentInset)
         clipScrollView.canRecoveryClosure = { [weak self] (_, canRecovery) in
-//            guard let `self` = self else { return }
-//            self.imageToolView.restoreBtn.isEnabled = canRecovery
+            guard let `self` = self else { return }
+            self.imageToolView.rebackBtn.isEnabled = canRecovery
         }
         clipScrollView.prepareToScaleClosure = { [weak self] (_, prepareToScale) in
-//            guard let `self` = self else { return }
-//            self.imageToolView.cancelBtn.isEnabled = !prepareToScale
-//            self.imageToolView.completeBtn.isEnabled = !prepareToScale
+            guard let `self` = self else { return }
+            self.imageToolView.cancelBtn.isEnabled = !prepareToScale
+            self.imageToolView.confirmBtn.isEnabled = !prepareToScale
         }
         view.insertSubview(clipScrollView, at: 0)
         self.clipScrollView = clipScrollView
@@ -123,6 +121,22 @@ class HXImageClipViewController: UIViewController {
             self.clipImageCallback?(imageModel)
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    private func rotateBtnClicked() {
+        switch orientation {
+        case .up:
+            orientation = .right
+        case .right:
+            orientation = .down
+        case .down:
+            orientation = .left
+        case .left:
+            orientation = .up
+        
+        default:
+            orientation = .up
+        }
+        clipScrollView?.rotate(orientation: orientation)
     }
     
 }

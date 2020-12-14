@@ -16,9 +16,6 @@
 		90822A75258676C60071D762 /* HXImageClipResizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A74258676C60071D762 /* HXImageClipResizeView.swift */; };
 		90822A77258676DD0071D762 /* HXImageClipScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A76258676DC0071D762 /* HXImageClipScrollView.swift */; };
 		90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A78258676E80071D762 /* HXImageClipViewController.swift */; };
-		90822A822586782E0071D762 /* SEEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A812586782E0071D762 /* SEEditPictureViewController.m */; };
-		90822A872586E3260071D762 /* SEImageClipResizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A832586E3250071D762 /* SEImageClipResizeView.m */; };
-		90822A882586E3260071D762 /* SEImageClipScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A862586E3260071D762 /* SEImageClipScrollView.m */; };
 		A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */; };
 		A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */; };
 		A05AA04E257F6AFD0017A6B8 /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA048257F6AFD0017A6B8 /* SDBrowserImageView.m */; };
@@ -84,12 +81,6 @@
 		90822A74258676C60071D762 /* HXImageClipResizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipResizeView.swift; sourceTree = "<group>"; };
 		90822A76258676DC0071D762 /* HXImageClipScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipScrollView.swift; sourceTree = "<group>"; };
 		90822A78258676E80071D762 /* HXImageClipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipViewController.swift; sourceTree = "<group>"; };
-		90822A802586782E0071D762 /* SEEditPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEEditPictureViewController.h; sourceTree = "<group>"; };
-		90822A812586782E0071D762 /* SEEditPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEEditPictureViewController.m; sourceTree = "<group>"; };
-		90822A832586E3250071D762 /* SEImageClipResizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageClipResizeView.m; sourceTree = "<group>"; };
-		90822A842586E3250071D762 /* SEImageClipScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageClipScrollView.h; sourceTree = "<group>"; };
-		90822A852586E3250071D762 /* SEImageClipResizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageClipResizeView.h; sourceTree = "<group>"; };
-		90822A862586E3260071D762 /* SEImageClipScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageClipScrollView.m; sourceTree = "<group>"; };
 		A05AA045257F6AFD0017A6B8 /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
 		A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
 		A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
@@ -267,17 +258,6 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		90822A892586E32C0071D762 /* temp */ = {
-			isa = PBXGroup;
-			children = (
-				90822A852586E3250071D762 /* SEImageClipResizeView.h */,
-				90822A832586E3250071D762 /* SEImageClipResizeView.m */,
-				90822A842586E3250071D762 /* SEImageClipScrollView.h */,
-				90822A862586E3260071D762 /* SEImageClipScrollView.m */,
-			);
-			path = temp;
-			sourceTree = "<group>";
-		};
 		A05AA044257F6AFD0017A6B8 /* SDPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,8 +342,6 @@
 		A05AA08F2580D9260017A6B8 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				90822A802586782E0071D762 /* SEEditPictureViewController.h */,
-				90822A812586782E0071D762 /* SEEditPictureViewController.m */,
 				90822A78258676E80071D762 /* HXImageClipViewController.swift */,
 				90822A7125866F1B0071D762 /* SEPhotoLibrary-Bridging-Header.h */,
 			);
@@ -382,18 +360,10 @@
 		A05AA0922580DA270017A6B8 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				90822A892586E32C0071D762 /* temp */,
 				90822A76258676DC0071D762 /* HXImageClipScrollView.swift */,
 				90822A74258676C60071D762 /* HXImageClipResizeView.swift */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		A05AA0932580DA320017A6B8 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		A0A0BBC7255E6875008597BB /* photoLibrary */ = {
@@ -520,7 +490,6 @@
 		A0CCCA98257F19D40000E241 /* editPicture */ = {
 			isa = PBXGroup;
 			children = (
-				A05AA0932580DA320017A6B8 /* model */,
 				A05AA0922580DA270017A6B8 /* view */,
 				A05AA08F2580D9260017A6B8 /* controller */,
 				A05AA08A2580CC2D0017A6B8 /* temp */,
@@ -645,7 +614,6 @@
 				A0CCCAA7257F1A430000E241 /* TOCropViewControllerTransitioning.m in Sources */,
 				A05AA082257F6DF60017A6B8 /* UIButton+WebCache.m in Sources */,
 				90822A75258676C60071D762 /* HXImageClipResizeView.swift in Sources */,
-				90822A822586782E0071D762 /* SEEditPictureViewController.m in Sources */,
 				A0A0BBDC255E713F008597BB /* SEAlbumViewController.m in Sources */,
 				A0CCCABD257F1C7F0000E241 /* TOCropScrollView.m in Sources */,
 				A05AA07E257F6DF60017A6B8 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -661,12 +629,10 @@
 				90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,
 				A05AA076257F6DF60017A6B8 /* SDWebImageDecoder.m in Sources */,
-				90822A882586E3260071D762 /* SEImageClipScrollView.m in Sources */,
 				A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */,
 				A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */,
 				A05AA079257F6DF60017A6B8 /* UIImage+GIF.m in Sources */,
 				90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */,
-				90822A872586E3260071D762 /* SEImageClipResizeView.m in Sources */,
 				A0A0BBDF255F63AB008597BB /* SEAlbumCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
