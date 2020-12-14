@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		90822A05257E7CC60071D762 /* SEEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A04257E7CC60071D762 /* SEEditPictureViewController.m */; };
 		90822A09257E87160071D762 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A07257E87160071D762 /* UIImage+Extension.m */; };
 		90822A512581E7120071D762 /* SEImageNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A4D2581E7120071D762 /* SEImageNavigationView.m */; };
 		90822A522581E7120071D762 /* SEImageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A502581E7120071D762 /* SEImageToolView.m */; };
 		90822A5E2581ECC50071D762 /* SEPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A5A2581ECC50071D762 /* SEPreviewCell.m */; };
 		90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */; };
+		90822A6F2584F3C20071D762 /* clipIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90822A6E2584F3C20071D762 /* clipIcon@2x.png */; };
+		90822A75258676C60071D762 /* HXImageClipResizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A74258676C60071D762 /* HXImageClipResizeView.swift */; };
+		90822A77258676DD0071D762 /* HXImageClipScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A76258676DC0071D762 /* HXImageClipScrollView.swift */; };
+		90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A78258676E80071D762 /* HXImageClipViewController.swift */; };
+		90822A822586782E0071D762 /* SEEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A812586782E0071D762 /* SEEditPictureViewController.m */; };
+		90822A872586E3260071D762 /* SEImageClipResizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A832586E3250071D762 /* SEImageClipResizeView.m */; };
+		90822A882586E3260071D762 /* SEImageClipScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90822A862586E3260071D762 /* SEImageClipScrollView.m */; };
 		A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */; };
 		A05AA04D257F6AFD0017A6B8 /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */; };
 		A05AA04E257F6AFD0017A6B8 /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA048257F6AFD0017A6B8 /* SDBrowserImageView.m */; };
@@ -50,7 +56,7 @@
 		A0C7441B257DC9C900AB707B /* SEAlbumListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441A257DC9C900AB707B /* SEAlbumListViewCell.m */; };
 		A0C7441F257DCE8B00AB707B /* SEAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C7441E257DCE8B00AB707B /* SEAlbumView.m */; };
 		A0C74423257E033C00AB707B /* SECameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C74422257E033C00AB707B /* SECameraViewController.m */; };
-		A0C74492257E2E8F00AB707B /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C74491257E2E8F00AB707B /* camera.png */; };
+		A0C74492257E2E8F00AB707B /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C74491257E2E8F00AB707B /* camera@2x.png */; };
 		A0CCCA9B257F1A0E0000E241 /* TOCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */; };
 		A0CCCA9F257F1A280000E241 /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCA9E257F1A280000E241 /* TOCropView.m */; };
 		A0CCCAA3257F1A370000E241 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCCAA1257F1A370000E241 /* TOCropToolbar.m */; };
@@ -63,8 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		90822A03257E7CC60071D762 /* SEEditPictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEEditPictureViewController.h; sourceTree = "<group>"; };
-		90822A04257E7CC60071D762 /* SEEditPictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEEditPictureViewController.m; sourceTree = "<group>"; };
 		90822A07257E87160071D762 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		90822A08257E87160071D762 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
 		90822A4D2581E7120071D762 /* SEImageNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageNavigationView.m; sourceTree = "<group>"; };
@@ -75,6 +79,17 @@
 		90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPreviewThumbCell.m; sourceTree = "<group>"; };
 		90822A5C2581ECC50071D762 /* SEPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPreviewCell.h; sourceTree = "<group>"; };
 		90822A5D2581ECC50071D762 /* SEPreviewThumbCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPreviewThumbCell.h; sourceTree = "<group>"; };
+		90822A6E2584F3C20071D762 /* clipIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipIcon@2x.png"; sourceTree = "<group>"; };
+		90822A7125866F1B0071D762 /* SEPhotoLibrary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SEPhotoLibrary-Bridging-Header.h"; sourceTree = "<group>"; };
+		90822A74258676C60071D762 /* HXImageClipResizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipResizeView.swift; sourceTree = "<group>"; };
+		90822A76258676DC0071D762 /* HXImageClipScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipScrollView.swift; sourceTree = "<group>"; };
+		90822A78258676E80071D762 /* HXImageClipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXImageClipViewController.swift; sourceTree = "<group>"; };
+		90822A802586782E0071D762 /* SEEditPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEEditPictureViewController.h; sourceTree = "<group>"; };
+		90822A812586782E0071D762 /* SEEditPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEEditPictureViewController.m; sourceTree = "<group>"; };
+		90822A832586E3250071D762 /* SEImageClipResizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageClipResizeView.m; sourceTree = "<group>"; };
+		90822A842586E3250071D762 /* SEImageClipScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageClipScrollView.h; sourceTree = "<group>"; };
+		90822A852586E3250071D762 /* SEImageClipResizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEImageClipResizeView.h; sourceTree = "<group>"; };
+		90822A862586E3260071D762 /* SEImageClipScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEImageClipScrollView.m; sourceTree = "<group>"; };
 		A05AA045257F6AFD0017A6B8 /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
 		A05AA046257F6AFD0017A6B8 /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
 		A05AA047257F6AFD0017A6B8 /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
@@ -149,7 +164,7 @@
 		A0C7441E257DCE8B00AB707B /* SEAlbumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumView.m; sourceTree = "<group>"; };
 		A0C74421257E033C00AB707B /* SECameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SECameraViewController.h; sourceTree = "<group>"; };
 		A0C74422257E033C00AB707B /* SECameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SECameraViewController.m; sourceTree = "<group>"; };
-		A0C74491257E2E8F00AB707B /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		A0C74491257E2E8F00AB707B /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 		A0CCCA99257F1A0E0000E241 /* TOCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewController.h; sourceTree = "<group>"; };
 		A0CCCA9A257F1A0E0000E241 /* TOCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewController.m; sourceTree = "<group>"; };
 		A0CCCA9D257F1A270000E241 /* TOCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropView.h; sourceTree = "<group>"; };
@@ -215,24 +230,12 @@
 		90822A452580F5110071D762 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				90822A532581E8D40071D762 /* cell */,
-				90822A4E2581E7120071D762 /* SEImageNavigationView.h */,
-				90822A4D2581E7120071D762 /* SEImageNavigationView.m */,
-				90822A4F2581E7120071D762 /* SEImageToolView.h */,
-				90822A502581E7120071D762 /* SEImageToolView.m */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		90822A532581E8D40071D762 /* cell */ = {
-			isa = PBXGroup;
-			children = (
 				90822A5C2581ECC50071D762 /* SEPreviewCell.h */,
 				90822A5A2581ECC50071D762 /* SEPreviewCell.m */,
 				90822A5D2581ECC50071D762 /* SEPreviewThumbCell.h */,
 				90822A5B2581ECC50071D762 /* SEPreviewThumbCell.m */,
 			);
-			path = cell;
+			path = view;
 			sourceTree = "<group>";
 		};
 		90822A60258266BC0071D762 /* albumManager */ = {
@@ -242,6 +245,37 @@
 				A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */,
 			);
 			path = albumManager;
+			sourceTree = "<group>";
+		};
+		90822A6D2584F3700071D762 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				A0A0BBCA255E68C6008597BB /* model */,
+				90822A702584F4910071D762 /* view */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		90822A702584F4910071D762 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				90822A4E2581E7120071D762 /* SEImageNavigationView.h */,
+				90822A4D2581E7120071D762 /* SEImageNavigationView.m */,
+				90822A4F2581E7120071D762 /* SEImageToolView.h */,
+				90822A502581E7120071D762 /* SEImageToolView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		90822A892586E32C0071D762 /* temp */ = {
+			isa = PBXGroup;
+			children = (
+				90822A852586E3250071D762 /* SEImageClipResizeView.h */,
+				90822A832586E3250071D762 /* SEImageClipResizeView.m */,
+				90822A842586E3250071D762 /* SEImageClipScrollView.h */,
+				90822A862586E3260071D762 /* SEImageClipScrollView.m */,
+			);
+			path = temp;
 			sourceTree = "<group>";
 		};
 		A05AA044257F6AFD0017A6B8 /* SDPhotoBrowser */ = {
@@ -328,8 +362,10 @@
 		A05AA08F2580D9260017A6B8 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				90822A03257E7CC60071D762 /* SEEditPictureViewController.h */,
-				90822A04257E7CC60071D762 /* SEEditPictureViewController.m */,
+				90822A802586782E0071D762 /* SEEditPictureViewController.h */,
+				90822A812586782E0071D762 /* SEEditPictureViewController.m */,
+				90822A78258676E80071D762 /* HXImageClipViewController.swift */,
+				90822A7125866F1B0071D762 /* SEPhotoLibrary-Bridging-Header.h */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -337,7 +373,6 @@
 		A05AA0902580D9540017A6B8 /* selectPicture */ = {
 			isa = PBXGroup;
 			children = (
-				A0A0BBCA255E68C6008597BB /* model */,
 				A0A0BBC9255E68B5008597BB /* view */,
 				A0A0BBC8255E68AB008597BB /* controller */,
 			);
@@ -347,6 +382,9 @@
 		A05AA0922580DA270017A6B8 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				90822A892586E32C0071D762 /* temp */,
+				90822A76258676DC0071D762 /* HXImageClipScrollView.swift */,
+				90822A74258676C60071D762 /* HXImageClipResizeView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -358,9 +396,10 @@
 			path = model;
 			sourceTree = "<group>";
 		};
-		A0A0BBC7255E6875008597BB /* Album */ = {
+		A0A0BBC7255E6875008597BB /* photoLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				90822A6D2584F3700071D762 /* common */,
 				90822A432580F4F00071D762 /* previewPicture */,
 				A05AA0902580D9540017A6B8 /* selectPicture */,
 				A0CCCA98257F19D40000E241 /* editPicture */,
@@ -369,7 +408,7 @@
 				A0C74490257E2E8300AB707B /* assets */,
 				A0A0BBD9255E6A7A008597BB /* manager */,
 			);
-			path = Album;
+			path = photoLibrary;
 			sourceTree = "<group>";
 		};
 		A0A0BBC8255E68AB008597BB /* controller */ = {
@@ -442,7 +481,7 @@
 		A0B3FD96255ABB6B0072BCED /* SEPhotoLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				A0A0BBC7255E6875008597BB /* Album */,
+				A0A0BBC7255E6875008597BB /* photoLibrary */,
 				A0B3FD97255ABB6B0072BCED /* AppDelegate.h */,
 				A0B3FD98255ABB6B0072BCED /* AppDelegate.m */,
 				A0B3FD9D255ABB6B0072BCED /* ViewController.h */,
@@ -472,7 +511,8 @@
 		A0C74490257E2E8300AB707B /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				A0C74491257E2E8F00AB707B /* camera.png */,
+				90822A6E2584F3C20071D762 /* clipIcon@2x.png */,
+				A0C74491257E2E8F00AB707B /* camera@2x.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -532,6 +572,7 @@
 				TargetAttributes = {
 					A0B3FD93255ABB6B0072BCED = {
 						CreatedOnToolsVersion = 11.7;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -560,7 +601,8 @@
 			files = (
 				A0B3FDA7255ABB6E0072BCED /* LaunchScreen.storyboard in Resources */,
 				A0B3FDA4255ABB6E0072BCED /* Assets.xcassets in Resources */,
-				A0C74492257E2E8F00AB707B /* camera.png in Resources */,
+				A0C74492257E2E8F00AB707B /* camera@2x.png in Resources */,
+				90822A6F2584F3C20071D762 /* clipIcon@2x.png in Resources */,
 				A0B3FDA2255ABB6B0072BCED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,6 +633,7 @@
 				A0CCCA9F257F1A280000E241 /* TOCropView.m in Sources */,
 				A0CCCAB9257F1C6F0000E241 /* TOCropOverlayView.m in Sources */,
 				A05AA078257F6DF60017A6B8 /* SDWebImageDownloader.m in Sources */,
+				90822A77258676DD0071D762 /* HXImageClipScrollView.swift in Sources */,
 				A05AA04C257F6AFD0017A6B8 /* SDPhotoBrowser.m in Sources */,
 				A0A0BBD8255E6A45008597BB /* SEPhotoModel.m in Sources */,
 				A05AA07A257F6DF60017A6B8 /* UIImage+MultiFormat.m in Sources */,
@@ -601,9 +644,10 @@
 				A0CCCA9B257F1A0E0000E241 /* TOCropViewController.m in Sources */,
 				A0CCCAA7257F1A430000E241 /* TOCropViewControllerTransitioning.m in Sources */,
 				A05AA082257F6DF60017A6B8 /* UIButton+WebCache.m in Sources */,
+				90822A75258676C60071D762 /* HXImageClipResizeView.swift in Sources */,
+				90822A822586782E0071D762 /* SEEditPictureViewController.m in Sources */,
 				A0A0BBDC255E713F008597BB /* SEAlbumViewController.m in Sources */,
 				A0CCCABD257F1C7F0000E241 /* TOCropScrollView.m in Sources */,
-				90822A05257E7CC60071D762 /* SEEditPictureViewController.m in Sources */,
 				A05AA07E257F6DF60017A6B8 /* SDWebImageDownloaderOperation.m in Sources */,
 				A0B3FD99255ABB6B0072BCED /* AppDelegate.m in Sources */,
 				A0CCCAAF257F1A6D0000E241 /* UIImage+CropRotate.m in Sources */,
@@ -617,9 +661,12 @@
 				90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,
 				A05AA076257F6DF60017A6B8 /* SDWebImageDecoder.m in Sources */,
+				90822A882586E3260071D762 /* SEImageClipScrollView.m in Sources */,
 				A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */,
 				A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */,
 				A05AA079257F6DF60017A6B8 /* UIImage+GIF.m in Sources */,
+				90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */,
+				90822A872586E3260071D762 /* SEImageClipResizeView.m in Sources */,
 				A0A0BBDF255F63AB008597BB /* SEAlbumCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,8 +807,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4RTA9R7QH9;
 				INFOPLIST_FILE = SEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -772,6 +821,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = seeEmil.com.SEPhotoLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/editPicture/controller/SEPhotoLibrary-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -780,8 +832,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4RTA9R7QH9;
 				INFOPLIST_FILE = SEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -792,6 +846,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = seeEmil.com.SEPhotoLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/editPicture/controller/SEPhotoLibrary-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
