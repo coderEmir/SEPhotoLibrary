@@ -33,11 +33,6 @@ typedef void (^CallBackImageBlock)(UIImage * image);
 
 @property (nonatomic ,copy) ChoiceCountChangedBlock choiceCountChangedBlock;
 
-
-- (void)requestPreviewImage:(PHAsset *)asset callBackImage:(CallBackImageBlock)callBackImageBlock;
-
-- (void)requestThumbImage:(PHAsset *)asset callBackImage:(CallBackImageBlock)callBackImageBlock;
-
 + (instancetype)defaultManager;
 
 - (void)pickUpImages:(NSMutableArray<SEPhotoModel *> *)model unCheckedIndexes:(NSArray *)unCheckedIndexes stateBlock:(void(^)(BOOL isSuccess))stateBlock;

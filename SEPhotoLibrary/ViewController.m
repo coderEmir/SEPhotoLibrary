@@ -25,7 +25,7 @@
 
 - (void)btnEvent
 {
-    [SEAlbumManager showPhotoManager:self withMaxImageCount:9 showCamera:YES showFilter:YES pictureScrollsFromTheTop:YES andAlbumArrayBlock:^(NSMutableArray<UIImage *> * _Nonnull photos) {
+    [SEAlbumManager showPhotoManager:self withMaxImageCount:9 showCamera:YES showFilter:YES pictureScrollsFromTheTop:YES andAlbumArrayBlock:^(NSArray<UIImage *> * _Nullable photos) {
             
     }];
 }

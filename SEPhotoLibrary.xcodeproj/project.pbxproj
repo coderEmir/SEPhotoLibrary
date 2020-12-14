@@ -18,6 +18,7 @@
 		90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90822A78258676E80071D762 /* HXImageClipViewController.swift */; };
 		A05AA08D2580CCBB0017A6B8 /* SEPreviewPictureController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA08C2580CCBB0017A6B8 /* SEPreviewPictureController.m */; };
 		A05AA0B12583206E0017A6B8 /* UIScrollView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AA0B02583206E0017A6B8 /* UIScrollView+Extension.m */; };
+		A09399EC25874071001529F3 /* HXPhotoImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09399EB25874071001529F3 /* HXPhotoImageManager.swift */; };
 		A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */; };
 		A0A0BBD2255E694C008597BB /* SEPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBD1255E694C008597BB /* SEPhotoManager.m */; };
 		A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0BBD4255E6A37008597BB /* SEAlbumModel.m */; };
@@ -58,6 +59,7 @@
 		A05AA08C2580CCBB0017A6B8 /* SEPreviewPictureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEPreviewPictureController.m; sourceTree = "<group>"; };
 		A05AA0AF2583206E0017A6B8 /* UIScrollView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Extension.h"; sourceTree = "<group>"; };
 		A05AA0B02583206E0017A6B8 /* UIScrollView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Extension.m"; sourceTree = "<group>"; };
+		A09399EB25874071001529F3 /* HXPhotoImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXPhotoImageManager.swift; sourceTree = "<group>"; };
 		A0A0BBCC255E68F8008597BB /* SEAlbumManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEAlbumManager.h; sourceTree = "<group>"; };
 		A0A0BBCD255E68F8008597BB /* SEAlbumManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEAlbumManager.m; sourceTree = "<group>"; };
 		A0A0BBD0255E694C008597BB /* SEPhotoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEPhotoManager.h; sourceTree = "<group>"; };
@@ -179,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				90822A78258676E80071D762 /* HXImageClipViewController.swift */,
-				90822A7125866F1B0071D762 /* SEPhotoLibrary-Bridging-Header.h */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -205,6 +206,7 @@
 		A0A0BBC7255E6875008597BB /* photoLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				90822A7125866F1B0071D762 /* SEPhotoLibrary-Bridging-Header.h */,
 				90822A6D2584F3700071D762 /* common */,
 				90822A432580F4F00071D762 /* previewPicture */,
 				A05AA0902580D9540017A6B8 /* selectPicture */,
@@ -251,6 +253,7 @@
 		A0A0BBCF255E6923008597BB /* PhotoManager */ = {
 			isa = PBXGroup;
 			children = (
+				A09399EB25874071001529F3 /* HXPhotoImageManager.swift */,
 				A0A0BBD0255E694C008597BB /* SEPhotoManager.h */,
 				A0A0BBD1255E694C008597BB /* SEPhotoManager.m */,
 			);
@@ -425,6 +428,7 @@
 				90822A5F2581ECC50071D762 /* SEPreviewThumbCell.m in Sources */,
 				A0B3FDAA255ABB6E0072BCED /* main.m in Sources */,
 				A0A0BBCE255E68F8008597BB /* SEAlbumManager.m in Sources */,
+				A09399EC25874071001529F3 /* HXPhotoImageManager.swift in Sources */,
 				A0A0BBD5255E6A37008597BB /* SEAlbumModel.m in Sources */,
 				90822A79258676E80071D762 /* HXImageClipViewController.swift in Sources */,
 				A0A0BBDF255F63AB008597BB /* SEAlbumCollectionViewCell.m in Sources */,
@@ -581,7 +585,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = seeEmil.com.SEPhotoLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/editPicture/controller/SEPhotoLibrary-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/SEPhotoLibrary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -606,7 +610,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = seeEmil.com.SEPhotoLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/editPicture/controller/SEPhotoLibrary-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SEPhotoLibrary/photoLibrary/SEPhotoLibrary-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
