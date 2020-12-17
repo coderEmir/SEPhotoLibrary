@@ -20,6 +20,8 @@
 - (void)setModel:(SEPhotoModel *)model
 {
     _model = model;
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     self.imageView.layer.borderWidth = _model.isSelectedPage ? 1 : 0;
     self.imageView.layer.borderColor = _model.isSelectedPage ? UIColor.redColor.CGColor : UIColor.clearColor.CGColor;
     
@@ -29,17 +31,12 @@
          self.imageView.image = model.thumbImage;
         return;
     }
-    
+    __weak typeof (self) weakSelf = self;
     [HXPhotoImageManager requestThumbImageFor:self.model.asset completion:^(UIImage * _Nullable image, BOOL isFinished) {
         if (!isFinished) return;
         model.thumbImage = image;
-        self.imageView.image = image;
+        weakSelf.imageView.image = image;
     }];
-//    [SEPhotoDefaultManager requestThumbImage:model.asset callBackImage:^(UIImage * _Nonnull image) {
-//        model.thumbImage = image;
-//        self.imageView.image = image;
-//    }];
-    
 }
 
 - (void)layoutSubviews

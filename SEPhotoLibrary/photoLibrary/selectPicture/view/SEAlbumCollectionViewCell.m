@@ -67,8 +67,8 @@ static CGFloat const pictureNumber = 3;
     CGFloat imageWidth = (SEScreenWidth - 20.f) / 5.5;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     CGFloat imageWH = imageWidth * UIScreen.mainScreen.scale;
-    // 同步获得图片, 只会返回1张图片
-    options.synchronous = NO;
+    
+    options.synchronous = YES;
     [[PHCachingImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(imageWH, imageWH) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         
         if (self.row == indexPath.row) self.photoImageView.image = result;

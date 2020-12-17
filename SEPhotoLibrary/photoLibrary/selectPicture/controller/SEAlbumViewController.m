@@ -204,8 +204,13 @@
         }];
         controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:controller animated:YES completion:nil];
+        return;
     }
     
+    if (SEPhotoDefaultManager.maxImageCount == SEPhotoDefaultManager.choiceCount)
+    {
+        if (![self.albumModel.selectRows containsObject:@(indexPath.row)]) return;
+    }
     // TODO: 进入图片预览
     [self previewPictureWithSpecifySubscript:indexPath.row];
 }

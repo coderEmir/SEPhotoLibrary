@@ -31,12 +31,8 @@
 
 - (void)setUp
 {
-    [self.imageView removeFromSuperview];
-    [self.scrollView removeFromSuperview];
-//    [self.indicatorView removeFromSuperview];
-    
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.contentView addSubview:self.scrollView];
-//    [self.contentView addSubview:self.indicatorView];
 }
 
 - (void)loadImage
@@ -46,19 +42,13 @@
         self.imageView.image = self.model.editedImage;
         return;
     }
-    self.imageView.image = self.model.thumbImage;
-    
+    __weak typeof(self) weakSelf = self;
     [HXPhotoImageManager requestPreviewImageFor:self.model.asset completion:^(UIImage * _Nullable image, BOOL isFinished) {
         if (!isFinished) return;
-        self.imageView.image = image;
-        self.imageView.frame = [self calculateContainerFrame:self.imageView.image];
+        weakSelf.imageView.image = image;
+        weakSelf.imageView.frame = [weakSelf calculateContainerFrame:weakSelf.imageView.image];
+        [weakSelf resizeImageView];
     }];
-//    [SEPhotoDefaultManager requestPreviewImage:self.model.asset callBackImage:^(UIImage * _Nullable image) {
-//
-//        self.imageView.image = image;
-//        self.imageView.frame = [self calculateContainerFrame:self.imageView.image];
-//        [self resizeImageView];
-//    }];
 }
 
 - (void)resizeImageView
